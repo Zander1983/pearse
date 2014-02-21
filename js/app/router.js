@@ -18,12 +18,13 @@ define(function (require) {
         moving,
         money,
         welcome,
+        video,
         that;
 
     return Backbone.Router.extend({
 
         routes: {
-            "": "getMap",
+            "": "getNews",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
             "support": "getSupport",
@@ -31,8 +32,10 @@ define(function (require) {
             "directions": "getDirections",
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
-            "welcome": "getWelcome",
             "staff-item/:id": "getStaffItem",
+            "video": "getVideo",
+            "video-item/:id": "getVideoItem",
+            "welcome": "getWelcome",
             "certification": "getCertification",
             "certification-item/:id": "getCertificationItem",
             "moving": "getMoving",
@@ -51,6 +54,7 @@ define(function (require) {
             "daycourse": "getDayCourse",
             "daycourse-item/:id": "getDayCourseItem",
             "map": "getMap",
+            "contact": "getContact",
         },
         
         initialize: function() {   
@@ -263,7 +267,54 @@ define(function (require) {
 
         },
         
+        getStaffItem: function (id) {
+            
+            require(["app/views/StaffItem"], function (StaffItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new StaffItem({model: staff.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+           
+           
+        getVideo: function (id) {
+
+                require(["app/models/video", "app/views/VideoList"], function (model, VideoList) {
+
+                    if(typeof(video)==='undefined' || video===null){
+                        
+                        video = new model.VideoCollection();
+
+                        video.fetch({
+                            full_url: true,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new VideoList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new VideoList({collection: video, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
         
+        getVideoItem: function (id) {
+            
+            require(["app/views/VideoItem"], function (VideoItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new VideoItem({model: video.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+           
+                
         getWelcome: function () {
 
                 require(["app/models/welcome", "app/views/Welcome"], function (model, Welcome) {
@@ -272,14 +323,9 @@ define(function (require) {
                         
                         welcome = new model.Welcome();
 
-                        console.log('before the fetch');
-
                         welcome.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (model) {
-                                    
-                                console.log('in getWelcome and model is ');
-                                console.log(model);
                                 
                                 Useful.correctView(that.body);
                                 slider.slidePage(new Welcome({model: model, message_count:that.message_count}).$el);                         
@@ -299,17 +345,6 @@ define(function (require) {
                 });
 
         },
-        
-        
-        getStaffItem: function (id) {
-            
-            require(["app/views/StaffItem"], function (StaffItem) {
-                Useful.correctView(that.body);
-                 slider.slidePage(new StaffItem({model: staff.get(id), message_count:that.message_count}).$el);
-                                 
-            });
-        },
-            
             
         getCertification: function (id) {
 
@@ -631,6 +666,15 @@ define(function (require) {
                 //google.maps.event.trigger(mapView.map, 'resize');
                 
                 that.body.find('.main-content').css('min-height', '500px');
+             });
+        },
+                
+                
+        getContact: function () {
+            
+            require(["app/views/Contact"], function (Contact) { 
+                Useful.correctView(that.body);
+                slider.slidePage(new Contact({message_count:that.message_count}).$el);               
              });
         },
      

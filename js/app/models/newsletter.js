@@ -17,7 +17,7 @@ define(function (require) {
         NewsLetterCollection = Backbone.Collection.extend({
 
             model: NewsLetter,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw',
+            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw',
             
             //This is used so I can test on a browser. On a device, use the direct link
          

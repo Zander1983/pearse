@@ -13,38 +13,27 @@ define(function (require) {
         
         Welcome = Backbone.Model.extend({  
             
+            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw',
+            
+            /*
             url: function(){
                     return "/school-proxy.php?type=welcome";
-                 },
+                 },*/
             
         
-            parse: function (data) {
-        
-                    console.log('in the model parse');
+            parse: function (xml) {
 
-                    xml = data;
+                title = $(xml).find('item').find('title').text();
 
+                description = $(xml).find('item').find('description').text();
 
-                    title = $(xml).find('item').find('title').text();
-                    
-                    description = $(xml).find('item').find('description').text();
-                    
-                    pubDate = $(xml).find('item').find('pubDate').text();
-                    
-                    pubDate = pubDate.substring(0, pubDate.length-12);
-                
-                    
-                    
-       
-                    parsed.push({id:id, title: title,
-                                description:description, pubDate:pubDate});
-                    title, description, pubDate = "";
-                   id++;
-              
-              
+                pubDate = $(xml).find('item').find('pubDate').text();
 
-                console.log('parsed is ');
-                console.log(parsed);
+                pubDate = pubDate.substring(0, pubDate.length-12);
+
+                parsed.title = title;
+                parsed.description = description;
+                parsed.pubDate = pubDate;
                 
                 return parsed;
             },

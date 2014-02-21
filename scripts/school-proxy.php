@@ -32,6 +32,11 @@ elseif($type=="directions"){
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
     
 }
+elseif($type=="video"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=3&format=raw');
+    
+}
 elseif($type=='welcome'){
     
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw');

@@ -36,7 +36,7 @@ define(function (require) {
 
                 that.mapOptions = {
                    center: that.myLatlng,
-                   zoom: 12,
+                   zoom: 15,
                    mapTypeId: google.maps.MapTypeId.ROADMAP
                };
 
