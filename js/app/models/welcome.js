@@ -13,32 +13,35 @@ define(function (require) {
         
         Welcome = Backbone.Model.extend({  
             
-            urlRoot: function(){
+            url: function(){
                     return "/school-proxy.php?type=welcome";
                  },
             
         
             parse: function (data) {
+        
+                    console.log('in the model parse');
 
-                xml = data;
+                    xml = data;
 
-              
-                $(xml).find('item').each(function (index) {
-           
-                    title = $(this).find('title').text();
+
+                    title = $(xml).find('item').find('title').text();
                     
-                    description = $(this).find('description').text();
+                    description = $(xml).find('item').find('description').text();
                     
-                    pubDate = $(this).find('pubDate').text();
+                    pubDate = $(xml).find('item').find('pubDate').text();
                     
                     pubDate = pubDate.substring(0, pubDate.length-12);
+                
+                    
                     
        
                     parsed.push({id:id, title: title,
                                 description:description, pubDate:pubDate});
                     title, description, pubDate = "";
                    id++;
-                });
+              
+              
 
                 console.log('parsed is ');
                 console.log(parsed);
@@ -50,7 +53,8 @@ define(function (require) {
             fetch: function (options) {
                 options = options || {};
                 options.dataType = "xml";
-                return Backbone.Collection.prototype.fetch.call(this, options);
+                
+                return Backbone.Model.prototype.fetch.call(this, options);
             }
 
         });
