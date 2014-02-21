@@ -32,6 +32,21 @@ elseif($type=="directions"){
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
     
 }
+elseif($type=='money'){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw');
+    
+}
+elseif($type=="moving"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=13&format=rawhttp://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=15&format=raw');
+    
+}
+elseif($type=="daycourse"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=11&format=raw');
+    
+}
 elseif($type=='support'){
     
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=8&format=raw');

@@ -14,6 +14,9 @@ define(function (require) {
         directions,
         facilities,
         support,
+        daycourse,
+        moving,
+        money,
         that;
 
     return Backbone.Router.extend({
@@ -28,6 +31,10 @@ define(function (require) {
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
             "staff-item/:id": "getStaffItem",
+            "moving": "getMoving",
+            "moving-item/:id": "getMovingItem",
+            "money": "getMoney",
+            "money-item/:id": "getMoneyItem",
             "policies": "getPolicies",
             "policies-item/:id": "getPoliciesItem",
             "newsletter": "getNewsLetter",
@@ -37,6 +44,8 @@ define(function (require) {
             "facebook": "getFacebook",
             "facilities": "getFacilities",
             "facilities-item/:id": "getFacilitiesItem",
+            "daycourse": "getDayCourse",
+            "daycourse-item/:id": "getDayCourseItem",
         },
         
         initialize: function() {   
@@ -259,6 +268,84 @@ define(function (require) {
             });
         },
             
+            
+        getMoving: function (id) {
+
+                require(["app/models/moving", "app/views/MovingList"], function (model, MovingList) {
+
+                    if(typeof(moving)==='undefined' || moving===null){
+                        
+                        moving = new model.MovingCollection();
+
+                        moving.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new MovingList({collection: moving, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getMovingItem: function (id) {
+            
+            require(["app/views/MovingItem"], function (MovingItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new MovingItem({model: moving.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+            
+            
+        getMoney: function (id) {
+
+                require(["app/models/money", "app/views/MoneyList"], function (model, MoneyList) {
+
+                    if(typeof(money)==='undefined' || money===null){
+                        
+                        money = new model.MoneyCollection();
+
+                        money.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new MoneyList({collection: money, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getMoneyItem: function (id) {
+            
+            require(["app/views/MoneyItem"], function (MoneyItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new MoneyItem({model: money.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+            
                 
         getPolicies: function (id) {
 
@@ -413,6 +500,44 @@ define(function (require) {
             });
         },
         
+        
+        getDayCourse: function (id) {
+
+                require(["app/models/daycourse", "app/views/DayCourseList"], function (model, DayCourseList) {
+                    
+                    if(typeof(daycourse)==='undefined' || daycourse===null){
+                        
+                        daycourse = new model.DayCourseCollection();
+
+                        daycourse.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new DayCourseList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new DayCourseList({collection: daycourse, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getDayCourseItem: function (id) {
+            
+            require(["app/views/DayCourseItem"], function (DayCourseItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new DayCourseItem({model: daycourse.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
      
         updateMessageCounter: function(){
        
