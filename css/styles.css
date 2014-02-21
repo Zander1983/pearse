@@ -274,22 +274,7 @@ html, body, #map-container{
 }
 
 
-.topcoat-navigation-bar{
-    background-color: #0c3b67;
-    /*
-    background-image: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            color-stop(0, #E62300),
-            color-stop(0.56, #C31A00)
-    );
-    background-image: -o-linear-gradient(bottom, #E62300 0%, #C31A00 56%);
-    background-image: -moz-linear-gradient(bottom, #E62300 0%, #C31A00 56%);
-    background-image: -webkit-linear-gradient(bottom, #E62300 0%, #C31A00 56%);
-    background-image: -ms-linear-gradient(bottom, #E62300 0%, #C31A00 56%);
-    background-image: linear-gradient(to bottom, #E62300 0%, #C31A00 56%);*/
-}
+
 
 /**** Calendar CSS *****/
 
