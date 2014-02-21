@@ -10,8 +10,10 @@ define(function (require) {
         calendar,
         newsletter,
         staff,
+        policies,
         directions,
         facilities,
+        support,
         that;
 
     return Backbone.Router.extend({
@@ -20,10 +22,14 @@ define(function (require) {
             "": "getNews",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
+            "support": "getSupport",
+            "support-item/:id": "getSupportItem",
             "directions": "getDirections",
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
             "staff-item/:id": "getStaffItem",
+            "policies": "getPolicies",
+            "policies-item/:id": "getPoliciesItem",
             "newsletter": "getNewsLetter",
             "newsletter-item/:id": "getNewsLetterItem",
             "calendar": "getCalendar",
@@ -138,6 +144,44 @@ define(function (require) {
                                  
             });
         },
+                
+        getSupport: function (id) {
+
+                require(["app/models/support", "app/views/SupportList"], function (model, SupportList) {
+
+                    if(typeof(support)==='undefined' || support===null){
+                        
+                        support = new model.SupportCollection();
+
+                        support.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new SupportList({collection: support, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getSupportItem: function (id) {
+            
+            require(["app/views/SupportItem"], function (SupportItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new SupportItem({model: support.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
            
         getDirections: function (id) {
 
@@ -151,9 +195,8 @@ define(function (require) {
                             full_url: false,
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="directions"){
-                                    slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
-                                }    
+                                slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
+                                
                             }
                         });
                     }
@@ -190,9 +233,8 @@ define(function (require) {
                             full_url: false,
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="staff"){
-                                    slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
-                                }    
+                                slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
+                                
                             }
                         });
                     }
@@ -216,7 +258,45 @@ define(function (require) {
                                  
             });
         },
+            
                 
+        getPolicies: function (id) {
+
+                require(["app/models/policies", "app/views/PoliciesList"], function (model, PoliciesList) {
+
+                    if(typeof(policies)==='undefined' || policies===null){
+                        
+                        policies = new model.PoliciesCollection();
+
+                        policies.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new PoliciesList({collection: policies, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getPoliciesItem: function (id) {
+            
+            require(["app/views/PoliciesItem"], function (PoliciesItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new PoliciesItem({model: policies.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
                 
         getNewsLetter: function (id) {
 
@@ -230,13 +310,9 @@ define(function (require) {
                             full_url: false,
                             success: function (collection) {
                                 
-                                console.log('collection length is ');
-                                console.log(collection.length);
-                                
                                 Useful.correctView(that.body);
-                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="newsletter"){
-                                    slider.slidePage(new NewsLetterList({collection: collection, message_count:that.message_count}).$el);                         
-                                }    
+                                slider.slidePage(new NewsLetterList({collection: collection, message_count:that.message_count}).$el);                         
+                                
                             }
                         });
                     }
@@ -310,7 +386,7 @@ define(function (require) {
                         facilities = new model.FacilitiesCollection();
 
                         facilities.fetch({
-                            full_url: true,
+                            full_url: false,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         

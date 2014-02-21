@@ -22,9 +22,19 @@ elseif($type=='newsletter'){
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw');    
 
 }
+elseif($type=="policies"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=9&format=raw');
+    
+}
 elseif($type=="directions"){
     
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
+    
+}
+elseif($type=='support'){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=8&format=raw');
     
 }
 elseif ($type=='service') { 
