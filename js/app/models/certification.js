@@ -9,21 +9,21 @@ define(function (require) {
         title = "", 
         description = "", 
         pubDate = "", 
-        Money = Backbone.Model.extend({  
+        Certification = Backbone.Model.extend({  
 
         }),
 
         
-        MoneyCollection = Backbone.Collection.extend({
+        CertificationCollection = Backbone.Collection.extend({
 
-            model: Money,
-            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw',
+            model: Certification,
+            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=14&format=raw',
             
             //This is used so I can test on a browser. On a device, use the direct link
          
             /*
             url: function(){
-                    return "/school-proxy.php?type=money";
+                    return "/school-proxy.php?type=certification";
                  },*/
             
         
@@ -63,8 +63,8 @@ define(function (require) {
 
 
     return {
-        Money: Money,
-        MoneyCollection: MoneyCollection
+        Certification: Certification,
+        CertificationCollection: CertificationCollection
     };
 
 });

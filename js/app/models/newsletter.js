@@ -21,10 +21,10 @@ define(function (require) {
             
             //This is used so I can test on a browser. On a device, use the direct link
          
-            
+            /*
             url: function(){
                     return "/school-proxy.php?type=newsletter";
-                 },
+                 },*/
             
         
             parse: function (data) {

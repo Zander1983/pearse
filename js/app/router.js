@@ -17,12 +17,13 @@ define(function (require) {
         daycourse,
         moving,
         money,
+        welcome,
         that;
 
     return Backbone.Router.extend({
 
         routes: {
-            "": "getNews",
+            "": "getMap",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
             "support": "getSupport",
@@ -30,7 +31,10 @@ define(function (require) {
             "directions": "getDirections",
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
+            "welcome": "getWelcome",
             "staff-item/:id": "getStaffItem",
+            "certification": "getCertification",
+            "certification-item/:id": "getCertificationItem",
             "moving": "getMoving",
             "moving-item/:id": "getMovingItem",
             "money": "getMoney",
@@ -46,6 +50,7 @@ define(function (require) {
             "facilities-item/:id": "getFacilitiesItem",
             "daycourse": "getDayCourse",
             "daycourse-item/:id": "getDayCourseItem",
+            "map": "getMap",
         },
         
         initialize: function() {   
@@ -124,7 +129,7 @@ define(function (require) {
                         news = new model.NewsCollection();
 
                         news.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
@@ -163,7 +168,7 @@ define(function (require) {
                         support = new model.SupportCollection();
 
                         support.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
@@ -201,7 +206,7 @@ define(function (require) {
                         directions = new model.DirectionsCollection();
 
                         directions.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -239,7 +244,7 @@ define(function (require) {
                         staff = new model.StaffCollection();
 
                         staff.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
@@ -259,6 +264,43 @@ define(function (require) {
         },
         
         
+        getWelcome: function () {
+
+                require(["app/models/welcome", "app/views/Welcome"], function (model, Welcome) {
+
+                    if(typeof(welcome)==='undefined' || welcome===null){
+                        
+                        welcome = new model.Welcome();
+
+                        console.log('before the fetch');
+
+                        welcome.fetch({
+                            full_url: false,
+                            success: function (model) {
+                                    
+                                console.log('in getWelcome and model is ');
+                                console.log(model);
+                                
+                                Useful.correctView(that.body);
+                                slider.slidePage(new Welcome({model: model, message_count:that.message_count}).$el);                         
+                                
+                            },
+                            error:   function(model, xhr, options){
+                               console.log('Error on fetch')
+                               console.log(xhr.responseText);
+                            },
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new Welcome({model: welcome, message_count:that.message_count}).$el);
+                    }
+
+                });
+
+        },
+        
+        
         getStaffItem: function (id) {
             
             require(["app/views/StaffItem"], function (StaffItem) {
@@ -269,6 +311,44 @@ define(function (require) {
         },
             
             
+        getCertification: function (id) {
+
+                require(["app/models/certification", "app/views/CertificationList"], function (model, CertificationList) {
+
+                    if(typeof(certification)==='undefined' || certification===null){
+                        
+                        certification = new model.CertificationCollection();
+
+                        certification.fetch({
+                            full_url: true,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new CertificationList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new CertificationList({collection: certification, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getCertificationItem: function (id) {
+            
+            require(["app/views/CertificationItem"], function (CertificationItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new CertificationItem({model: certification.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+            
         getMoving: function (id) {
 
                 require(["app/models/moving", "app/views/MovingList"], function (model, MovingList) {
@@ -278,7 +358,7 @@ define(function (require) {
                         moving = new model.MovingCollection();
 
                         moving.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
@@ -317,7 +397,7 @@ define(function (require) {
                         money = new model.MoneyCollection();
 
                         money.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
@@ -356,7 +436,7 @@ define(function (require) {
                         policies = new model.PoliciesCollection();
 
                         policies.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -394,7 +474,7 @@ define(function (require) {
                         newsletter = new model.NewsLetterCollection();
 
                         newsletter.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 
                                 Useful.correctView(that.body);
@@ -432,7 +512,7 @@ define(function (require) {
                     calendar = new model.CalendarCollection();
                     
                     calendar.fetch({
-                        full_url: false,
+                        full_url: true,
                         success: function (collection) {
                             Useful.correctView(that.body);
                             slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
@@ -473,7 +553,7 @@ define(function (require) {
                         facilities = new model.FacilitiesCollection();
 
                         facilities.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -510,7 +590,7 @@ define(function (require) {
                         daycourse = new model.DayCourseCollection();
 
                         daycourse.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DayCourseList({collection: collection, message_count:that.message_count}).$el);                         
@@ -537,6 +617,21 @@ define(function (require) {
                  slider.slidePage(new DayCourseItem({model: daycourse.get(id), message_count:that.message_count}).$el);
                                  
             });
+        },
+                
+                
+        getMap: function () {
+            
+            require(["app/views/Map"], function (Map) {    
+                var mapView = new Map({body:that.body, message_count:that.message_count});
+                //mapView.delegateEvents();
+                Useful.correctView(that.body);
+                slider.slidePage(mapView.$el);
+                mapView.render();
+                //google.maps.event.trigger(mapView.map, 'resize');
+                
+                that.body.find('.main-content').css('min-height', '500px');
+             });
         },
      
         updateMessageCounter: function(){

@@ -17,14 +17,14 @@ define(function (require) {
         DirectionsCollection = Backbone.Collection.extend({
 
             model: Directions,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw',
+            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw',
             
             //This is used so I can test on a browser. On a device, use the direct link
          
-            
+            /*
             url: function(){
                     return "/school-proxy.php?type=directions";
-                 },
+                 },*/
             
         
             parse: function (data) {
