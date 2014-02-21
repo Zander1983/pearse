@@ -61,7 +61,7 @@ elseif($type=="welcome"){
 elseif($type=="calendar"){
     //https://www.google.com/calendar/feeds/mallowcollegefe@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true
  
-    $xml = file_get_contents('https://www.google.com/calendar/feeds/mallowcollegefe@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true');
+    $xml = file_get_contents('https://www.google.com/calendar/feeds/pearse.college12@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true');
 
 }
 elseif($type=="albums"){

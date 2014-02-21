@@ -27,6 +27,8 @@ define(function (require) {
             "": "getNews",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
+            "calendar": "getCalendar",
+            "calendar-item/:id": "getCalendarItem",
         },
         
         initialize: function() {   
@@ -134,6 +136,39 @@ define(function (require) {
                                  
             });
         },
+                
+                
+        getCalendar: function () {
+
+            require(["app/models/calendar", "app/views/CalendarList"], function (model, CalendarList) {
+       
+                if(typeof(calendar)==='undefined' || calendar===null){
+                    calendar = new model.CalendarCollection();
+                    
+                    calendar.fetch({
+                        full_url: false,
+                        success: function (collection) {
+                            Useful.correctView(that.body);
+                            slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
+                        }
+                    });
+                }
+                else{
+                    Useful.correctView(that.body);
+                    slider.slidePage(new CalendarList({collection: calendar, message_count:that.message_count}).$el);
+                }
+                            
+            });
+        },
+       
+                
+        getCalendarItem: function (id) {
+            require(["app/views/CalendarItem"], function (CalendarItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new CalendarItem({model: calendar.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },   
         
      
         updateMessageCounter: function(){
