@@ -19,6 +19,8 @@ define(function (require) {
         money,
         welcome,
         video,
+        articles,
+        deviceModel,
         that;
 
     return Backbone.Router.extend({
@@ -33,6 +35,7 @@ define(function (require) {
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
             "staff-item/:id": "getStaffItem",
+            "notification": "getNotification",
             "video": "getVideo",
             "video-item/:id": "getVideoItem",
             "welcome": "getWelcome",
@@ -55,6 +58,8 @@ define(function (require) {
             "daycourse-item/:id": "getDayCourseItem",
             "map": "getMap",
             "contact": "getContact",
+            "articles/:project_title": "getArticles",
+            "article/:id": "getArticle",
         },
         
         initialize: function() {   
@@ -677,6 +682,157 @@ define(function (require) {
                 slider.slidePage(new Contact({message_count:that.message_count}).$el);               
              });
         },
+                
+        getNotification: function () {
+            
+            require(["app/models/device", "app/views/Notification"], function (model, Notification) {
+                
+                  if(typeof(deviceModel)==='undefined' || deviceModel===null){
+
+                        deviceModel = new model.Device({id:that.device_id});
+                        
+                        if(typeof(that.device_id)==='undefined' || that.device_id===null){
+                            that.setDeviceDetails();
+                        }
+
+                        if(typeof(that.device_id)==='undefined' || that.device_id===null || typeof(that.api_key)==='undefined' || that.api_key===null){
+                            Useful.correctView(that.body);
+                            Useful.showAlert('Could not get notification settings, please try again later', 'Problem');
+                            window.location.hash = "news";
+                        }
+                        else{              
+                            deviceModel.fetch({
+                                api: true,
+                                headers: {device_id:that.device_id,api_key:that.api_key},        
+                                success: function (data) {
+                                    Useful.correctView(that.body);
+                                    slider.slidePage(new Notification({model: data, 
+                                                                        message_count:that.message_count
+                                                                        }).$el);                          
+                                }
+                            });
+                        }
+                    
+                  }else{    
+                        Useful.correctView(that.body);
+                        slider.slidePage(new Notification({model: deviceModel, 
+                                                            message_count:that.message_count
+                                                            }).$el);    
+                  }
+
+       
+             });
+        },
+        
+        
+                
+        getArticle: function (id) {
+            // alert('in getArticle');
+            require(["app/models/article", "app/views/Article"], function (models, Article) {
+                               
+                if(typeof(articles)==='undefined' || articles===null){
+                    
+                    
+                    if(typeof(that.device_id)==='undefined' || that.device_id===null){
+                        that.setDeviceDetails();
+                    }
+
+                    var article = new models.Article({id: id});
+
+                    article.fetch({
+                        api: true,
+                        headers: {device_id:that.device_id,api_key:that.api_key},
+                        success: function (data) {
+                            
+                            var articleView = new Article({model: data, message_count:that.message_count});
+
+                            Useful.correctView(that.body);
+                            slider.slidePage(articleView.$el);
+
+                            $.when(articleView.saveView()).done(function(data){
+                                that.message_count = data.count;
+                            });
+          
+                            data.set('seen', '1');
+
+                        },
+                        error: function(){
+                            console.log('failed to fecth artcie'); 
+                        }
+                    });
+                    
+                }
+                else{
+                    
+                    var articleView = new Article({model: articles.get(id), 
+                                                   device_id:that.device_id,
+                                                   api_key:that.api_key,
+                                                   message_count:that.message_count
+                                                    });
+                                                    
+                    Useful.correctView(that.body);
+                    slider.slidePage(articleView.$el);
+
+                    $.when(articleView.saveView()).done(function(data){
+                        that.message_count = data.count;
+                    });
+
+                    articles.get(id).set('seen', '1');
+
+                }
+
+            });
+
+        },
+        
+        
+        getArticles: function (project_title) {
+            
+            require(["app/models/article", "app/views/ArticleList"], function (models, ArticleList) {
+             
+                if(typeof(articles)==='undefined' || articles===null){
+                    
+
+                    
+                    if(typeof(that.device_id)==='undefined' || that.device_id===null){
+                        that.setDeviceDetails();
+                    }
+                    
+                    if(typeof(that.device_id)!=='undefined' && that.device_id!==null){
+                       
+                        articles = new models.ArticleCollection({device_id: that.device_id, project_title: project_title
+                                                                });
+
+                        articles.fetch({
+                            api: true,
+                            headers: {device_id:that.device_id,api_key:that.api_key},
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new ArticleList({collection: collection,message_count:that.message_count}).$el);
+                            }, 
+                            error: function(model, xhr, options){
+                                    console.log('there was an error, response is ');
+                                    console.log(xhr.responseText);
+                            }
+                        }); 
+                        
+                    }
+                    else{
+                        Useful.showAlert('There was aproblem accessing messages, please close and reopen app and try again', 'One moment...');
+                    }
+
+
+                }
+                else{
+
+                    Useful.correctView(that.body);
+                    slider.slidePage(new ArticleList({collection: articles,message_count:that.message_count}).$el);
+                }
+  
+
+            });
+        },
+        
      
         updateMessageCounter: function(){
        
