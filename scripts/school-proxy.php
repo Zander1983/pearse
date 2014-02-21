@@ -12,6 +12,21 @@ if($type=='news'){
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw');    
 
 }
+elseif($type=='staff'){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw');    
+
+}
+elseif($type=='newsletter'){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw');    
+
+}
+elseif($type=="directions"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
+    
+}
 elseif ($type=='service') { 
     
     $xml = file_get_contents('http://mallowcollege.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
@@ -22,7 +37,7 @@ elseif ($type=='service') {
 }
 elseif ($type=='facilities') { 
     
-    $xml = file_get_contents('http://mallowcollege.ie/index.php?option=com_ninjarsssyndicator&feed_id=8&format=raw');
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw');
 
     
  //https://www.google.com/calendar/feeds/mountmercycollegecork@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=3&futureevents=true&alt=json

@@ -8,17 +8,10 @@ define(function (require) {
         slider      = new PageSlider($('body')),
         news,
         calendar,
-        deviceModel,
-        articles,
-        service,
+        newsletter,
+        staff,
+        directions,
         facilities,
-        information,
-        daycourse,
-        nightcourse,
-        welcome,
-        albums,
-        photos,
-        tweets,
         that;
 
     return Backbone.Router.extend({
@@ -27,8 +20,17 @@ define(function (require) {
             "": "getNews",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
+            "directions": "getDirections",
+            "directions-item/:id": "getDirectionsItem",
+            "staff": "getStaff",
+            "staff-item/:id": "getStaffItem",
+            "newsletter": "getNewsLetter",
+            "newsletter-item/:id": "getNewsLetterItem",
             "calendar": "getCalendar",
             "calendar-item/:id": "getCalendarItem",
+            "facebook": "getFacebook",
+            "facilities": "getFacilities",
+            "facilities-item/:id": "getFacilitiesItem",
         },
         
         initialize: function() {   
@@ -136,7 +138,128 @@ define(function (require) {
                                  
             });
         },
+           
+        getDirections: function (id) {
+
+                require(["app/models/directions", "app/views/DirectionsList"], function (model, DirectionsList) {
+
+                    if(typeof(directions)==='undefined' || directions===null){
+                        
+                        directions = new model.DirectionsCollection();
+
+                        directions.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="directions"){
+                                    slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
+                                }    
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new DirectionsList({collection: directions, message_count:that.message_count}).$el);
+                    }
+
+                });
                 
+            
+
+        },
+        
+        
+        getDirectionsItem: function (id) {
+            
+            require(["app/views/DirectionsItem"], function (DirectionsItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new DirectionsItem({model: directions.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },         
+
+        getStaff: function (id) {
+
+                require(["app/models/staff", "app/views/StaffList"], function (model, StaffList) {
+
+                    if(typeof(staff)==='undefined' || staff===null){
+                        
+                        staff = new model.StaffCollection();
+
+                        staff.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="staff"){
+                                    slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
+                                }    
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new StaffList({collection: staff, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getStaffItem: function (id) {
+            
+            require(["app/views/StaffItem"], function (StaffItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new StaffItem({model: staff.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+                
+                
+        getNewsLetter: function (id) {
+
+                require(["app/models/newsletter", "app/views/NewsLetterList"], function (model, NewsLetterList) {
+
+                    if(typeof(newsletter)==='undefined' || newsletter===null){
+                        
+                        newsletter = new model.NewsLetterCollection();
+
+                        newsletter.fetch({
+                            full_url: false,
+                            success: function (collection) {
+                                
+                                console.log('collection length is ');
+                                console.log(collection.length);
+                                
+                                Useful.correctView(that.body);
+                                if(Backbone.history.fragment==="" || Backbone.history.fragment==="newsletter"){
+                                    slider.slidePage(new NewsLetterList({collection: collection, message_count:that.message_count}).$el);                         
+                                }    
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new NewsLetterList({collection: newsletter, message_count:that.message_count}).$el);
+                    }
+
+                });
+                
+            
+
+        },
+        
+        
+        getNewsLetterItem: function (id) {
+            
+            require(["app/views/NewsLetterItem"], function (NewsLetterItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new NewsLetterItem({model: newsletter.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
                 
         getCalendar: function () {
 
@@ -169,6 +292,50 @@ define(function (require) {
                                  
             });
         },   
+                
+        getFacebook: function () {
+            
+            require(["app/views/Facebook"], function (Facebook) { 
+                Useful.correctView(that.body);
+                slider.slidePage(new Facebook({message_count:that.message_count}).$el);               
+             });
+        },
+                
+                
+        getFacilities: function (id) {
+
+                require(["app/models/facilities", "app/views/FacilitiesList"], function (model, FacilitiesList) {
+
+                    if(typeof(facilities)==='undefined' || facilities===null){
+                        facilities = new model.FacilitiesCollection();
+
+                        facilities.fetch({
+                            full_url: true,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                            }
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new FacilitiesList({collection: facilities, message_count:that.message_count}).$el);
+                    }
+
+                });
+
+        },
+        
+        
+        getFacilitiesItem: function (id) {
+            
+            require(["app/views/FacilitiesItem"], function (FacilitiesItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new FacilitiesItem({model: facilities.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
         
      
         updateMessageCounter: function(){

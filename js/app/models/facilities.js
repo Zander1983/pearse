@@ -9,21 +9,21 @@ define(function (require) {
         title = "", 
         description = "", 
         pubDate = "", 
-        NewsLetter = Backbone.Model.extend({  
+        Facilities = Backbone.Model.extend({  
 
         }),
 
         
-        NewsLetterCollection = Backbone.Collection.extend({
+        FacilitiesCollection = Backbone.Collection.extend({
 
-            model: NewsLetter,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw',
+            model: Facilities,
+            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw',
             
             //This is used so I can test on a browser. On a device, use the direct link
          
             
             url: function(){
-                    return "/school-proxy.php?type=newsletter";
+                    return "/school-proxy.php?type=facilities";
                  },
             
         
@@ -63,8 +63,8 @@ define(function (require) {
 
 
     return {
-        NewsLetter: NewsLetter,
-        NewsLetterCollection: NewsLetterCollection
+        Facilities: Facilities,
+        FacilitiesCollection: FacilitiesCollection
     };
 
 });
