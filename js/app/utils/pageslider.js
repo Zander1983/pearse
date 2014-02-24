@@ -16,7 +16,13 @@ define(function (require) {
 
             var l = stateHistory.length,
                 state = window.location.hash;
-
+        
+            console.log('stateHistory is ')
+            console.log(stateHistory);
+        
+            this.prepareTitle(state);
+           
+        
             if (l === 0) {
                 stateHistory.push(state);
                 this.slidePageFrom(page);
@@ -31,13 +37,23 @@ define(function (require) {
             }
 
         };
+        
+        this.prepareTitle = function(str){
+                            
+                str = str.split('/')[0];          
+                str = str.replace('-',' ');
+                str = str.replace('#','');                
+                str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                if(str==="") str="News";
+                $('.topcoat-navigation-bar__title').html(str);
+            
+        };
 
         // Use this function directly if you want to control the sliding direction outside PageSlider
         this.slidePageFrom = function (page, from) {
 
-            //remove nav
-           
-            container.append(page);
+   
+            $('.main-content').append(page);
 
             if (!currentPage || !from) {
                 page.attr("class", "page page-center");
@@ -65,6 +81,7 @@ define(function (require) {
             // Position the new page and the current page at the ending position of their animation with a transition class indicating the duration of the animation
             page.attr("class", "page transition page-center");
             currentPage.attr("class", "page transition " + (from === "page-left" ? "page-right" : "page-left"));
+            //currentPage.attr("class", "page transition page-right");
             currentPage = page;
         };
 

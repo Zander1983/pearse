@@ -130,10 +130,14 @@ define(function (require) {
                       
 
         getNews: function (id) {
+                
 
+                
                 require(["app/models/news", "app/views/NewsList"], function (model, NewsList) {
 
                     if(typeof(news)==='undefined' || news===null){
+                        
+                        Useful.showSpinner();
                         
                         news = new model.NewsCollection();
 
@@ -143,15 +147,38 @@ define(function (require) {
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
                                     slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
-                                }    
-                            }
+                                }
+                                
+                                console.log('in the success');
+                                
+                                Useful.hideSpinner();
+                                
+                            },
+                            error:   function(model, xhr, options){
+                               console.log('Error on fetch, respone is ')
+                               console.log(xhr.responseText);
+                               
+                               
+                               
+                               Useful.hideSpinner();
+                               
+                               if(!Useful.checkNetwork()){
+                                   //so no internet conection
+                                   
+                                   window.location.hash = "welcome";
+                                   
+                               }
+                               
+                            },
+                                    
                         });
                     }
                     else{
                         Useful.correctView(that.body);
                         slider.slidePage(new NewsList({collection: news, message_count:that.message_count}).$el);
                     }
-
+                    
+                    
                 });
                 
             
@@ -245,11 +272,11 @@ define(function (require) {
         },         
 
         getStaff: function (id) {
-
+                
                 require(["app/models/staff", "app/views/StaffList"], function (model, StaffList) {
 
                     if(typeof(staff)==='undefined' || staff===null){
-                        
+                        Useful.showSpinner();
                         staff = new model.StaffCollection();
 
                         staff.fetch({
@@ -257,7 +284,7 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
                             }
                         });
                     }
@@ -265,7 +292,7 @@ define(function (require) {
                         Useful.correctView(that.body);
                         slider.slidePage(new StaffList({collection: staff, message_count:that.message_count}).$el);
                     }
-
+                    
                 });
                 
             
@@ -321,10 +348,11 @@ define(function (require) {
            
                 
         getWelcome: function () {
-
+                
                 require(["app/models/welcome", "app/views/Welcome"], function (model, Welcome) {
 
                     if(typeof(welcome)==='undefined' || welcome===null){
+                        Useful.showSpinner();
                         
                         welcome = new model.Welcome();
 
@@ -334,7 +362,7 @@ define(function (require) {
                                 
                                 Useful.correctView(that.body);
                                 slider.slidePage(new Welcome({model: model, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
                             },
                             error:   function(model, xhr, options){
                                console.log('Error on fetch')
@@ -545,10 +573,12 @@ define(function (require) {
         },
                 
         getCalendar: function () {
-
+            
             require(["app/models/calendar", "app/views/CalendarList"], function (model, CalendarList) {
        
                 if(typeof(calendar)==='undefined' || calendar===null){
+                    Useful.showSpinner();
+                    
                     calendar = new model.CalendarCollection();
                     
                     calendar.fetch({
@@ -556,6 +586,7 @@ define(function (require) {
                         success: function (collection) {
                             Useful.correctView(that.body);
                             slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
+                            Useful.hideSpinner();
                         }
                     });
                 }
@@ -563,6 +594,8 @@ define(function (require) {
                     Useful.correctView(that.body);
                     slider.slidePage(new CalendarList({collection: calendar, message_count:that.message_count}).$el);
                 }
+                
+                
                             
             });
         },

@@ -107,7 +107,7 @@ var app = {
         }
 
     },
-
+            
 
     // result contains any message sent from the plugin call
     successHandler: function(result) {

@@ -12,10 +12,12 @@ define(function (require) {
 
     return Backbone.View.extend({
 
-        initialize: function () {
+        initialize: function (options) {
             this.removeDescriptionStyles();
             this.checkImagePaths();
             this.render();     
+            
+            this.changeTitle();
         },
         
         events: {
@@ -44,6 +46,12 @@ define(function (require) {
         render: function () {
             this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), model:this.model.attributes}));
             return this;
+        },
+                
+        changeTitle: function(){
+    
+            $('.topcoat-navigation-bar__title').html('News Item');
+        
         },
         
         removeDescriptionStyles: function(){

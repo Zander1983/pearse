@@ -14,7 +14,7 @@ define(function (require) {
         initialize: function () {
             
             this.render();
-           
+            this.changeTitle();  
         },
         
         events: {
@@ -45,6 +45,12 @@ define(function (require) {
             return this;
         },
         
+        
+        changeTitle: function(){
+    
+            $('.topcoat-navigation-bar__title').html('Calendar Item');
+        
+        },
 
 
     });

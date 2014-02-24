@@ -17,14 +17,14 @@ define(function (require) {
         MoneyCollection = Backbone.Collection.extend({
 
             model: Money,
-            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw',
+            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw',
             
             //This is used so I can test on a browser. On a device, use the direct link
          
-            /*
+            
             url: function(){
                     return "/school-proxy.php?type=money";
-                 },*/
+                 },
             
         
             parse: function (data) {

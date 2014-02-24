@@ -9,7 +9,7 @@ define(function() {
     var doBinds = function(n) {
 
             var body = $('body');
-            
+            var side_nav_list = $('#side-nav-list');
 
             body.on("click", "#slide-menu-button", function (e) {
 
@@ -44,9 +44,17 @@ define(function() {
                 $(this).parent('li').addClass('tappable-active');
             });
 
-            body.on('click', '.side-nav__list__item a', function(event) {
-                $(this).parent('li').addClass('side-nav-active');
-            });
+
+       
+              
+            $( ".side-nav__list__item a" ).click( function() {
+                
+                $( this ).parent().parent().parent().find('li').each(function(){
+                    $( this ).removeClass( 'side-nav-active' );
+                });
+                
+                $( this ).parent().addClass( 'side-nav-active' );
+             });
 
     };
     

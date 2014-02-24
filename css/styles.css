@@ -177,7 +177,8 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
     position: absolute;
     background: #dfe2e2;
     left: 0;
-    padding-top:4rem;
+    /*padding-top:4rem;*/
+    margin-top:4rem;
     width:100%;
     min-height:1050px;
     transition: left 0.2s ease-out;

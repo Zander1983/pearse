@@ -14,12 +14,19 @@ define(function (require) {
 
         initialize: function (options) {
             this.render();
+            this.changeTitle();
         },
 
         render: function (options) {
             
             this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), calendar:this.collection.toJSON()}));
 
+        },
+                
+        changeTitle: function(){
+    
+            $('.topcoat-navigation-bar__title').html('Calendar');
+        
         },
 
 

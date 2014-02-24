@@ -15,14 +15,14 @@ define(function (require) {
          
             this.render();
             this.collection.on("reset", this.render, this);
+
         },
 
         render: function () {
             this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), news:this.collection.toJSON()}));
             return this;
         },
-          
-
+ 
 
     });
 
