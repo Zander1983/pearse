@@ -19,6 +19,13 @@ define(function (require) {
         
             console.log('stateHistory is ')
             console.log(stateHistory);
+            
+            var previous = stateHistory[stateHistory.length-1];
+            previous = previous.substr(0, previous.indexOf('-')); 
+            previous = mystring.replace('#','');
+            
+            console.log('previous is ');
+            console.log(previous);
         
             this.prepareTitle(state);
            

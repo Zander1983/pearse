@@ -8,6 +8,7 @@
         server_url = "http://schoolspace.me", 
         standard_device_id = "63843", 
         standard_api_key = "hv7Vgd4jsbb",
-        twitter_handle = "xxx";  
+        twitter_handle = "xxx",
+        in_browser = true;  
   
 

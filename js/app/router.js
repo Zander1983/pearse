@@ -66,6 +66,7 @@ define(function (require) {
             
             that = this;
             that.body = $('body');
+            this.setupShell();
             
             //this.bind( "route", this.routeChange);
             
@@ -114,6 +115,19 @@ define(function (require) {
   
            });
 
+
+            
+        },
+                
+        setupShell: function(){
+    
+            require(["app/views/SetupShell"], function (SetupShell) {
+
+                new SetupShell({body:that.body});
+
+            });
+            
+    
         },
                 
         setDeviceDetails: function(){
@@ -131,7 +145,6 @@ define(function (require) {
 
         getNews: function (id) {
                 
-
                 
                 require(["app/models/news", "app/views/NewsList"], function (model, NewsList) {
 
@@ -149,25 +162,13 @@ define(function (require) {
                                     slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
                                 }
                                 
-                                console.log('in the success');
-                                
                                 Useful.hideSpinner();
                                 
                             },
                             error:   function(model, xhr, options){
-                               console.log('Error on fetch, respone is ')
-                               console.log(xhr.responseText);
-                               
-                               
                                
                                Useful.hideSpinner();
-                               
-                               if(!Useful.checkNetwork()){
-                                   //so no internet conection
-                                   
-                                   window.location.hash = "welcome";
-                                   
-                               }
+                               Useful.checkNetwork(slider);
                                
                             },
                                     

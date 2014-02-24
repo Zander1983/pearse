@@ -123,9 +123,11 @@ define(function (require) {
     UsefulFuncs.hideSpinner = function(body){
             
             try {
+                console.log('trying to hide spinner ');
               spinnerplugin.hide();
             } 
             catch(e) {
+                console.log('error caught');
             } 
             finally {
 
@@ -134,36 +136,30 @@ define(function (require) {
     
 
 
-    UsefulFuncs.checkNetwork = function(){
-        
-            var networkState = navigator.connection.type;
+    UsefulFuncs.checkNetwork = function(slider){
 
-            var states = {};
-            states[Connection.UNKNOWN]  = 'Unknown connection';
-            states[Connection.ETHERNET] = 'Ethernet connection';
-            states[Connection.WIFI]     = 'WiFi connection';
-            states[Connection.CELL_2G]  = 'Cell 2G connection';
-            states[Connection.CELL_3G]  = 'Cell 3G connection';
-            states[Connection.CELL_4G]  = 'Cell 4G connection';
-            states[Connection.CELL]     = 'Cell generic connection';
-            states[Connection.NONE]     = 'No network connection';
+        try {
+                var networkState = navigator.connection.type;
 
-            console.log('Connection type: ' + states[networkState]);
-            
-            //do this for Andriod, check for ios
-            if(networkState===Connection.NONE){
-                console.log('returning false');
-                return false;
-            }
-            else{
-                
-                console.log('returnung true');
-                console.log('networkState is ');
-                console.log(networkState);
-                console.log('Connection.NONE is ');
-                console.log(Connection.NONE);
-                return true;
-            }
+                //do this for Andriod, check for ios
+                if(networkState===Connection.NONE){
+
+                    require(["app/views/NoConnection"], function (NoConnection) {
+                        slider.slidePage(new NoConnection().$el); 
+                    }); 
+
+                }
+                else{
+                    require(["app/views/Unknown"], function (Unknown) {
+                        slider.slidePage(new Unknown().$el); 
+                    });          
+                }
+            } 
+            catch(e) {
+                    require(["app/views/Unknown"], function (Unknown) {
+                        slider.slidePage(new Unknown().$el); 
+                    });  
+            } 
         
     };
 
