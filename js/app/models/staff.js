@@ -16,14 +16,16 @@ define(function (require) {
         
         StaffCollection = Backbone.Collection.extend({
 
-            model: Staff,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-            
+            model: Staff,      
+                         
             url: function(){
-                    return "/school-proxy.php?type=staff";
-                 },
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=staff";
+                    }
+            },
             
         
             parse: function (data) {

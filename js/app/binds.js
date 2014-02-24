@@ -9,7 +9,7 @@ define(function() {
     var doBinds = function(n) {
 
             var body = $('body');
-            var side_nav_list = $('#side-nav-list');
+            //var side_nav_list = $('#side-nav-list');
 
             body.on("click", "#slide-menu-button", function (e) {
 
@@ -45,11 +45,11 @@ define(function() {
             });
 
 
-       
-              
+            
             $( ".side-nav__list__item a" ).click( function() {
                 
                 $( this ).parent().parent().parent().find('li').each(function(){
+                    console.log('in the each');
                     $( this ).removeClass( 'side-nav-active' );
                 });
                 

@@ -14,20 +14,16 @@ define(function (require) {
         // Use this function if you want PageSlider to automatically determine the sliding direction based on the state history
         this.slidePage = function (page) {
 
+            alert('in slide page');
+
             var l = stateHistory.length,
                 state = window.location.hash;
         
-            console.log('stateHistory is ')
-            console.log(stateHistory);
-            
-            var previous = stateHistory[stateHistory.length-1];
-            previous = previous.substr(0, previous.indexOf('-')); 
-            previous = mystring.replace('#','');
-            
-            console.log('previous is ');
-            console.log(previous);
+          //  state = this.cleanState(state);    
         
-            this.prepareTitle(state);
+           // var previous = stateHistory[stateHistory.length-1];
+    
+            //this.prepareTitleMenu(state, previous);
            
         
             if (l === 0) {
@@ -45,14 +41,37 @@ define(function (require) {
 
         };
         
-        this.prepareTitle = function(str){
-                            
-                str = str.split('/')[0];          
-                str = str.replace('-',' ');
-                str = str.replace('#','');                
-                str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-                if(str==="") str="News";
-                $('.topcoat-navigation-bar__title').html(str);
+        this.cleanState = function(state){
+          
+                if(typeof(state)!=='undefined'){
+                    var index = state.indexOf("-");
+                    if(index !== -1){
+                        //get word before the -
+                        state = state.substr(1, index-1); 
+                    }
+                    else{
+                        state = state.substr(1, state.length-1); 
+                    }
+                    //return state.charAt(0).toUpperCase() + state.slice(1)
+                }
+
+                return state;
+        };
+        
+        this.prepareTitleMenu = function(state, previous){
+                
+                if(state==="undefined"){
+                    var title = 'News';                   
+                }
+                else{
+                    var title = state.charAt(0).toUpperCase() + state.slice(1);                  
+                }
+
+                $('.topcoat-navigation-bar__title').html(title);
+                
+                 $('#news').removeClass( 'side-nav-active' );
+                
+                //unclick revious, click state
             
         };
 

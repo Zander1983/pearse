@@ -163,6 +163,31 @@ define(function (require) {
         
     };
 
+
+    UsefulFuncs.testCode = function(){
+      
+              var start = +new Date();  // log start timestamp
+                                for(var x=0; x++; x<1000){
+                                    var $news = $('#news');
+                                }
+                                var end =  +new Date();  // log end timestamp
+                                var diff = end - start;
+                                console.log('diff for #news is ');
+                                console.log(diff);
+
+                                var start = +new Date();  // log start timestamp
+                                for(var x=0; x++; x<1000){
+                                    var $news = $('li#news');
+                                }
+                                console.log('$news is ');
+                                console.log($news);
+                                
+                                var end =  +new Date();  // log end timestamp
+                                var diff = end - start;
+                                console.log('diff for li#news is ');
+                                console.log(diff); 
+        
+    };
     
     return UsefulFuncs;
 
