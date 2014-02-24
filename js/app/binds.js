@@ -45,16 +45,21 @@ define(function() {
             });
 
 
-            
-            $( ".side-nav__list__item a" ).click( function() {
                 
-                $( this ).parent().parent().parent().find('li').each(function(){
-                    console.log('in the each');
-                    $( this ).removeClass( 'side-nav-active' );
-                });
-                
-                $( this ).parent().addClass( 'side-nav-active' );
-             });
+            body.find("div#side-nav-cont a").click( function() {
+              //console.log('in side nav click');
+
+            console.log('in the find');
+
+              $( this ).parent().parent().parent().find('li').each(function(){
+                  //console.log('in the each');
+                  $( this ).removeClass( 'side-nav-active' );
+              });
+
+              $( this ).parent().addClass( 'side-nav-active' );
+
+
+           });
 
     };
     

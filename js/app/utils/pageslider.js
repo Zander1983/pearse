@@ -14,16 +14,14 @@ define(function (require) {
         // Use this function if you want PageSlider to automatically determine the sliding direction based on the state history
         this.slidePage = function (page) {
 
-            alert('in slide page');
-
             var l = stateHistory.length,
                 state = window.location.hash;
         
-          //  state = this.cleanState(state);    
+            state = this.cleanState(state);    
         
-           // var previous = stateHistory[stateHistory.length-1];
+            var previous = stateHistory[stateHistory.length-1];
     
-            //this.prepareTitleMenu(state, previous);
+            this.prepareTitleMenu(state, previous);
            
         
             if (l === 0) {
@@ -69,7 +67,16 @@ define(function (require) {
 
                 $('.topcoat-navigation-bar__title').html(title);
                 
-                 $('#news').removeClass( 'side-nav-active' );
+                var start = +new Date();   
+                
+                $('#'+previous).removeClass( 'side-nav-active' );
+                $('#'+state).addClass( 'side-nav-active' );
+                
+                var end =  +new Date();  // log end timestamp
+                var diff = end - start;
+                console.log('diff for using id is ');
+                console.log(diff);
+     
                 
                 //unclick revious, click state
             

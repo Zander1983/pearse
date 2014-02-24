@@ -166,7 +166,7 @@ define(function (require) {
 
     UsefulFuncs.testCode = function(){
       
-              var start = +new Date();  // log start timestamp
+                                var start = +new Date();  // log start timestamp
                                 for(var x=0; x++; x<1000){
                                     var $news = $('#news');
                                 }
