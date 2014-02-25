@@ -49,6 +49,7 @@ define(function (require) {
             
             $html.find('[style]').removeAttr('style');     
             $html.find('img').removeAttr('width').removeAttr('height');
+            $html.find('table td').removeAttr('width').removeAttr('height');
             
             return $html.html();
     };

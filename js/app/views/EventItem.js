@@ -4,7 +4,7 @@ define(function (require) {
 
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
-        tpl                 = require('text!tpl/CalendarItem.html'),
+        tpl                 = require('text!tpl/EventItem.html'),
         template = _.template(tpl);
 
     return Backbone.View.extend({

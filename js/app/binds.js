@@ -23,15 +23,9 @@ define(function() {
                 }
             });
             
-            /*
-            document.addEventListener("backbutton", function(){
-                
-                return true;
-                
-            }, false);*/
             
 
-            body.on("click", ".main-content", function (e) {
+            body.on("click", "#main-content", function (e) {
 
                 body.removeClass('left-nav');
                 //$('.side-nav').hide();
@@ -47,9 +41,7 @@ define(function() {
 
                 
             body.find("div#side-nav-cont a").click( function() {
-              //console.log('in side nav click');
 
-            console.log('in the find');
 
               $( this ).parent().parent().parent().find('li').each(function(){
                   //console.log('in the each');

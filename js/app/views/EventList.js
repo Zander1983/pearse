@@ -4,7 +4,7 @@ define(function (require) {
 
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
-        tpl                 = require('text!tpl/CalendarList.html'),
+        tpl                 = require('text!tpl/EventList.html'),
         template = _.template(tpl);
 
 
@@ -16,7 +16,7 @@ define(function (require) {
 
         render: function (options) {
             
-            this.$el.html(template({calendar:this.collection.toJSON()}));
+            this.$el.html(template({event:this.collection.toJSON()}));
 
         },
 

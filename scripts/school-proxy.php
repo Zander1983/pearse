@@ -12,6 +12,11 @@ if($type=='news'){
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw');    
 
 }
+elseif($type=="shoutout"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=17&format=raw');
+    
+}
 elseif($type=='staff'){
     
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw');    
@@ -71,17 +76,13 @@ elseif ($type=='service') {
     
     $xml = file_get_contents('http://mallowcollege.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
 
-    
- //https://www.google.com/calendar/feeds/mountmercycollegecork@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=3&futureevents=true&alt=json
-    
+  
 }
 elseif ($type=='facilities') { 
     
     $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw');
 
-    
- //https://www.google.com/calendar/feeds/mountmercycollegecork@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=3&futureevents=true&alt=json
-    
+
 }
 elseif($type=="information"){
 
@@ -113,11 +114,15 @@ elseif($type=="welcome"){
     $xml = file_get_contents('http://www.mallowcollege.ie/index.php?option=com_ninjarsssyndicator&feed_id=15&format=raw');
     
 }
-elseif($type=="calendar"){
-    //https://www.google.com/calendar/feeds/mallowcollegefe@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true
+elseif($type=="event"){
  
     $xml = file_get_contents('https://www.google.com/calendar/feeds/pearse.college12@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true');
 
+}
+elseif($type=="calendar"){
+    
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=18&format=raw');
+    
 }
 elseif($type=="albums"){
     

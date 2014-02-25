@@ -5,7 +5,7 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         UsefulFuncs         = require('app/utils/useful_func'),
-        tpl                 = require('text!tpl/NewsItem.html'),
+        tpl                 = require('text!tpl/ShoutOutItem.html'),
         template = _.template(tpl);
 
     return Backbone.View.extend({
@@ -14,7 +14,6 @@ define(function (require) {
             this.removeDescriptionStyles();
             this.checkImagePaths();
             this.render();     
-
         },
         
         events: {
@@ -44,7 +43,7 @@ define(function (require) {
             this.$el.html(template({model:this.model.attributes}));
             return this;
         },
-                
+  
         
         removeDescriptionStyles: function(){
       

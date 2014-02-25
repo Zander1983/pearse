@@ -9,21 +9,21 @@ define(function (require) {
         title = "", 
         description = "", 
         pubDate = "", 
-        Calendar = Backbone.Model.extend({  
+        ShoutOut = Backbone.Model.extend({  
 
         }),
 
         
-        CalendarCollection = Backbone.Collection.extend({
+        ShoutOutCollection = Backbone.Collection.extend({
 
-            model: Calendar,
+            model: ShoutOut,
          
             url: function(){
                     if(in_browser===false){
-                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=18&format=raw'
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=17&format=raw'
                     }
                     else{
-                        return "/school-proxy.php?type=calendar";
+                        return "/school-proxy.php?type=shoutout";
                     }
             },
             
@@ -64,8 +64,8 @@ define(function (require) {
 
 
     return {
-        Calendar: Calendar,
-        CalendarCollection: CalendarCollection
+        ShoutOut: ShoutOut,
+        ShoutOutCollection: ShoutOutCollection
     };
 
 });

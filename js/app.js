@@ -22,7 +22,7 @@ require(['backbone', 'app/router', 'app/binds'], function (Backbone, Router, Bin
 
     var router = new Router();
     
-    Binds.doBinds();
+    //Binds.doBinds();
 
     Backbone.history.start();
     

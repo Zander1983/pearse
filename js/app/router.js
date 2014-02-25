@@ -7,7 +7,7 @@ define(function (require) {
         Useful      = require('app/utils/useful_func'),
         slider      = new PageSlider($('body')),
         news,
-        calendar,
+        event,
         newsletter,
         staff,
         policies,
@@ -22,6 +22,8 @@ define(function (require) {
         articles,
         deviceModel,
         certification,
+        calendar,
+        shoutout,
         that;
 
     return Backbone.Router.extend({
@@ -30,6 +32,8 @@ define(function (require) {
             "": "getNews",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
+            "shout-out": "getShoutOut",
+            "shout-out-item/:id": "getShoutOutItem",
             "support": "getSupport",
             "support-item/:id": "getSupportItem",
             "directions": "getDirections",
@@ -50,6 +54,8 @@ define(function (require) {
             "policies-item/:id": "getPoliciesItem",
             "newsletter": "getNewsLetter",
             "newsletter-item/:id": "getNewsLetterItem",
+            "event": "getEvent",
+            "event-item/:id": "getEventItem",
             "calendar": "getCalendar",
             "calendar-item/:id": "getCalendarItem",
             "facebook": "getFacebook",
@@ -195,6 +201,58 @@ define(function (require) {
             require(["app/views/NewsItem"], function (NewsItem) {
                 Useful.correctView(that.body);
                  slider.slidePage(new NewsItem({model: news.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },
+                
+                
+        getShoutOut: function (id) {
+                
+                require(["app/models/shoutout", "app/views/ShoutOutList"], function (model, ShoutOutList) {
+
+                    if(typeof(shoutout)==='undefined' || shoutout===null){
+   
+                        Useful.showSpinner();
+                        
+                        shoutout = new model.ShoutOutCollection();
+
+                        shoutout.fetch({
+                            full_url: true,
+                            success: function (collection) {
+                                Useful.correctView(that.body);
+                                slider.slidePage(new ShoutOutList({collection: collection, message_count:that.message_count}).$el);                         
+                                
+                                
+                                Useful.hideSpinner();
+
+                            },
+                            error:   function(model, xhr, options){
+                               Useful.hideSpinner();
+                               Useful.checkNetwork(slider);
+                               
+                            },
+                                    
+                        });
+                    }
+                    else{
+                        Useful.correctView(that.body);
+                        slider.slidePage(new ShoutOutList({collection: shoutout, message_count:that.message_count}).$el);
+                    }
+                    
+        
+                    
+                });
+                
+            
+
+        },
+        
+        
+        getShoutOutItem: function (id) {
+            
+            require(["app/views/ShoutOutItem"], function (ShoutOutItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new ShoutOutItem({model: shoutout.get(id), message_count:that.message_count}).$el);
                                  
             });
         },
@@ -628,6 +686,50 @@ define(function (require) {
             });
         },
                 
+        getEvent: function () {
+            
+            require(["app/models/event", "app/views/EventList"], function (model, EventList) {
+       
+                if(typeof(event)==='undefined' || event===null){
+                    Useful.showSpinner();
+                    
+                    event = new model.EventCollection();
+                    
+                    event.fetch({
+                        full_url: true,
+                        success: function (collection) {
+                            Useful.correctView(that.body);
+                            slider.slidePage(new EventList({collection: collection, message_count:that.message_count}).$el);                          
+                            Useful.hideSpinner();
+                        },
+                            error:function(){
+
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
+                            }
+                    });
+                }
+                else{
+                    Useful.correctView(that.body);
+                    slider.slidePage(new EventList({collection: event, message_count:that.message_count}).$el);
+                }
+                
+                
+                            
+            });
+        },
+       
+                
+        getEventItem: function (id) {
+            require(["app/views/EventItem"], function (EventItem) {
+                Useful.correctView(that.body);
+                 slider.slidePage(new EventItem({model: event.get(id), message_count:that.message_count}).$el);
+                                 
+            });
+        },   
+                
+                
         getCalendar: function () {
             
             require(["app/models/calendar", "app/views/CalendarList"], function (model, CalendarList) {
@@ -669,7 +771,8 @@ define(function (require) {
                  slider.slidePage(new CalendarItem({model: calendar.get(id), message_count:that.message_count}).$el);
                                  
             });
-        },   
+        },
+                
                 
         getFacebook: function () {
             
@@ -773,8 +876,9 @@ define(function (require) {
                 slider.slidePage(mapView.$el);
                 mapView.render();
                 //google.maps.event.trigger(mapView.map, 'resize');
+                console.log('resizing....');
                 
-                that.body.find('.main-content').css('min-height', '500px');
+                that.body.find('#main-content').css('min-height', '500px');
              });
         },
                 
