@@ -17,14 +17,15 @@ define(function (require) {
         FacilitiesCollection = Backbone.Collection.extend({
 
             model: Facilities,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-         
-            
+                         
             url: function(){
-                    return "/school-proxy.php?type=facilities";
-                 },
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=facilities";
+                    }
+            },
             
         
             parse: function (data) {

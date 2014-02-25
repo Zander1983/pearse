@@ -156,7 +156,7 @@ define(function (require) {
                         news = new model.NewsCollection();
 
                         news.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
@@ -208,7 +208,7 @@ define(function (require) {
                         support = new model.SupportCollection();
 
                         support.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
@@ -246,7 +246,7 @@ define(function (require) {
                         directions = new model.DirectionsCollection();
 
                         directions.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -284,7 +284,7 @@ define(function (require) {
                         staff = new model.StaffCollection();
 
                         staff.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
@@ -322,7 +322,7 @@ define(function (require) {
                         video = new model.VideoCollection();
 
                         video.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new VideoList({collection: collection, message_count:that.message_count}).$el);                         
@@ -361,7 +361,7 @@ define(function (require) {
                         welcome = new model.Welcome();
 
                         welcome.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (model) {
                                 
                                 Useful.correctView(that.body);
@@ -392,7 +392,7 @@ define(function (require) {
                         certification = new model.CertificationCollection();
 
                         certification.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new CertificationList({collection: collection, message_count:that.message_count}).$el);                         
@@ -430,7 +430,7 @@ define(function (require) {
                         moving = new model.MovingCollection();
 
                         moving.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
@@ -469,7 +469,7 @@ define(function (require) {
                         money = new model.MoneyCollection();
 
                         money.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
@@ -508,7 +508,7 @@ define(function (require) {
                         policies = new model.PoliciesCollection();
 
                         policies.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -546,7 +546,7 @@ define(function (require) {
                         newsletter = new model.NewsLetterCollection();
 
                         newsletter.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 
                                 Useful.correctView(that.body);
@@ -586,7 +586,7 @@ define(function (require) {
                     calendar = new model.CalendarCollection();
                     
                     calendar.fetch({
-                        full_url: false,
+                        full_url: true,
                         success: function (collection) {
                             Useful.correctView(that.body);
                             slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
@@ -630,7 +630,7 @@ define(function (require) {
                         facilities = new model.FacilitiesCollection();
 
                         facilities.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -667,7 +667,7 @@ define(function (require) {
                         daycourse = new model.DayCourseCollection();
 
                         daycourse.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DayCourseList({collection: collection, message_count:that.message_count}).$el);                         

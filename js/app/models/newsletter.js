@@ -17,14 +17,15 @@ define(function (require) {
         NewsLetterCollection = Backbone.Collection.extend({
 
             model: NewsLetter,
-            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-         
-            /*
+        
             url: function(){
-                    return "/school-proxy.php?type=newsletter";
-                 },*/
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=newsletter";
+                    }
+            },
             
         
             parse: function (data) {

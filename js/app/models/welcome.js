@@ -13,12 +13,15 @@ define(function (require) {
         
         Welcome = Backbone.Model.extend({  
             
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw',
-            
-            
+                         
             url: function(){
-                    return "/school-proxy.php?type=welcome";
-                 },
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=welcome";
+                    }
+            },
             
         
             parse: function (xml) {

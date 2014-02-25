@@ -17,14 +17,15 @@ define(function (require) {
         VideoCollection = Backbone.Collection.extend({
 
             model: Video,
-            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=3&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-         
-            /*
+        
             url: function(){
-                    return "/school-proxy.php?type=video";
-                 },*/
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=3&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=video";
+                    }
+            },
             
         
             parse: function (data) {

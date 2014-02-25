@@ -17,14 +17,16 @@ define(function (require) {
         CertificationCollection = Backbone.Collection.extend({
 
             model: Certification,
-            url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=14&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-         
-            /*
+
+        
             url: function(){
-                    return "/school-proxy.php?type=certification";
-                 },*/
+                    if(in_browser===false){
+                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=14&format=raw'
+                    }
+                    else{
+                        return "/school-proxy.php?type=certification";
+                    }
+            },
             
         
             parse: function (data) {

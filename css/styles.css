@@ -110,7 +110,8 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
     width:250px;
    /* height:100%;*/
     background-color:#353535;
-    overflow-x:hidden;
+   /* overflow-x:hidden;*/
+    
 }
 
 
@@ -174,6 +175,7 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
   /* overflow:scroll;
     -webkit-overflow-scrolling: touch;*/
     overflow-x:hidden;
+    
     position: absolute;
     background: #dfe2e2;
     left: 0;

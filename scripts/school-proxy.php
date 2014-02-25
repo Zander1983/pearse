@@ -54,7 +54,7 @@ elseif($type=='money'){
 }
 elseif($type=="moving"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=13&format=rawhttp://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=15&format=raw');
+    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=13&format=raw');
     
 }
 elseif($type=="daycourse"){

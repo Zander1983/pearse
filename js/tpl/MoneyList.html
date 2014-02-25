@@ -1,21 +1,4 @@
-<div class="topcoat-navigation-bar">
-    
-    <div class="topcoat-navigation-bar__item left quarter">
-        <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button">
-            <img class="topcoat-icon" src="img/hamburger_light.png" />  
-        </a>
-    </div>    
-    
-    <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">Money</h1>
-    </div>
-</div>
 
-<%= side_nav
-%>
-
-
-<div class="main-content">
     <ul class="topcoat-list list" id="money-list">
     <% _.each(money, function(item) { %>
     <li class="topcoat-list__item" data-id="<%= item.id %>">
@@ -32,5 +15,3 @@
     }); %>
     </ul>
 
-    
-</div>
