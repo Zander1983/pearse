@@ -7,8 +7,6 @@ define(function (require) {
         models              = require('app/models/article_view'),
         Useful              = require('app/utils/useful_func'),
         tpl                 = require('text!tpl/Article.html'),
-        side_nav            = require('text!tpl/SideNav.html'),
-        side_template       = _.template(side_nav),
         template            = _.template(tpl),
         that;
 
@@ -60,8 +58,7 @@ define(function (require) {
 
         render: function (options) {
             
-            this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), 
-                                    title:this.model.get('title'),
+            this.$el.html(template({title:this.model.get('title'),
                                     content: this.model.get('content')
                                     }));
             return this;

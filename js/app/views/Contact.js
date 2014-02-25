@@ -5,8 +5,6 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/Contact.html'),
-        side_nav            = require('text!tpl/SideNav.html'),
-        side_template       = _.template(side_nav),
         template            = _.template(tpl);
 
     return Backbone.View.extend({
@@ -18,7 +16,7 @@ define(function (require) {
 
         render: function (options) {
          
-            this.$el.html(template({side_nav:side_template({message_count:this.options.message_count})}));
+            this.$el.html(template());
             return this;
         },
                 

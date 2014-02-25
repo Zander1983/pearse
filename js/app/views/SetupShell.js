@@ -5,7 +5,6 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/SetupShell.html'),
-        side_nav            = require('text!tpl/SideNav.html'),
         template            = _.template(tpl);
 
     return Backbone.View.extend({
