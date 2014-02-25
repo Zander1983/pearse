@@ -77,6 +77,9 @@ define(function (require) {
                 
             this.options.body.find("div#side-nav-cont a").click( function() {
 
+                if(window.location.hash==="#map"){
+                    that.options.body.find('#main-content').css('min-height', '1150px'); 
+                }
 
               $( this ).parent().parent().parent().find('li').each(function(){
                   //console.log('in the each');
