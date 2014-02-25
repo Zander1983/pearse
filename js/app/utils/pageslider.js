@@ -18,9 +18,9 @@ define(function (require) {
             var l = stateHistory.length,
                 state = window.location.hash;
         
-            state = this.cleanState(state);    
+            //state = this.cleanState(state);    
         
-            this.prepareTitleMenu(state);
+            this.setTitle(state);
            
         
             if (l === 0) {
@@ -55,13 +55,26 @@ define(function (require) {
                 return state;
         };
         
-        this.prepareTitleMenu = function(state){
+        this.setTitle = function(state){
+            
+                if(typeof(state)!=='undefined'){
+                    state = state.replace(/-/g, ' ');
+                    state = state.replace('#', ' ');
+                    
+                    var index = state.indexOf("/");
+                    if(index !== -1){
+                        //get word before the -
+                        state = state.substr(1, index-1); 
+                    }
+                    
+                }
 
                 if(state==="undefined" || state===""){
                     var title = 'News';                   
                 }
                 else{
-                    var title = state.charAt(0).toUpperCase() + state.slice(1);                  
+                    var title = state;
+                    //var title = state.charAt(0).toUpperCase() + state.slice(1);                  
                 }
 
                 $('#topbar-title').html(title);

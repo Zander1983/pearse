@@ -5,7 +5,7 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         UsefulFuncs         = require('app/utils/useful_func'),
-        tpl                 = require('text!tpl/DayCourseItem.html'),
+        tpl                 = require('text!tpl/CourseItem.html'),
         template = _.template(tpl);
 
     return Backbone.View.extend({

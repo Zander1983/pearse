@@ -9,14 +9,14 @@ define(function (require) {
         title = "", 
         description = "", 
         pubDate = "", 
-        DayCourse = Backbone.Model.extend({  
+        Course = Backbone.Model.extend({  
 
         }),
 
         
-        DayCourseCollection = Backbone.Collection.extend({
+        CourseCollection = Backbone.Collection.extend({
 
-            model: DayCourse,
+            model: Course,
         
             url: function(){
                     if(in_browser===false){
@@ -64,8 +64,8 @@ define(function (require) {
 
 
     return {
-        DayCourse: DayCourse,
-        DayCourseCollection: DayCourseCollection
+        Course: Course,
+        CourseCollection: CourseCollection
     };
 
 });

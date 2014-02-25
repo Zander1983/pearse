@@ -60,7 +60,7 @@ var app = {
                 error:   function(model, xhr, options){
 
                     console.log('error reggistering, response is : ');
-                    console.log(app.logObject(xhr));
+                    console.log(xhr.responseText);
                 },
             });
     },

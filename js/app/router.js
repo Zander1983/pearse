@@ -14,7 +14,7 @@ define(function (require) {
         directions,
         facilities,
         support,
-        daycourse,
+        courses,
         moving,
         money,
         welcome,
@@ -42,10 +42,10 @@ define(function (require) {
             "welcome": "getWelcome",
             "certification": "getCertification",
             "certification-item/:id": "getCertificationItem",
-            "moving": "getMoving",
+            "moving-on": "getMoving",
             "moving-item/:id": "getMovingItem",
-            "money": "getMoney",
-            "money-item/:id": "getMoneyItem",
+            "money-matters": "getMoney",
+            "money-matters-item/:id": "getMoneyItem",
             "policies": "getPolicies",
             "policies-item/:id": "getPoliciesItem",
             "newsletter": "getNewsLetter",
@@ -55,8 +55,8 @@ define(function (require) {
             "facebook": "getFacebook",
             "facilities": "getFacilities",
             "facilities-item/:id": "getFacilitiesItem",
-            "daycourse": "getDayCourse",
-            "daycourse-item/:id": "getDayCourseItem",
+            "courses": "getCourse",
+            "course-item/:id": "getCourseItem",
             "map": "getMap",
             "contact": "getContact",
             "articles/:project_title": "getArticles",
@@ -113,6 +113,7 @@ define(function (require) {
                         options.url = 'http://localhost/schoolspace/cli/pearse/www/scripts' + options.url
                     }
                 }
+   
   
            });
 
@@ -150,14 +151,17 @@ define(function (require) {
 
                     if(typeof(news)==='undefined' || news===null){
    
+                            
+   
                         Useful.showSpinner();
                         
                         news = new model.NewsCollection();
 
+                        console.log('before get news fetch');
                         news.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
-   
+                                console.log('success getting news');
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
                                     slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -168,7 +172,8 @@ define(function (require) {
                                 
                             },
                             error:   function(model, xhr, options){
-                               
+                               console.log('fetch error and resonse is ');
+                               console.log(xhr.responseText);
                                Useful.hideSpinner();
                                Useful.checkNetwork(slider);
                                
@@ -210,7 +215,7 @@ define(function (require) {
                         support = new model.SupportCollection();
 
                         support.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
@@ -256,7 +261,7 @@ define(function (require) {
                         directions = new model.DirectionsCollection();
 
                         directions.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -300,7 +305,7 @@ define(function (require) {
                         staff = new model.StaffCollection();
 
                         staff.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
@@ -344,7 +349,7 @@ define(function (require) {
                         video = new model.VideoCollection();
 
                         video.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new VideoList({collection: collection, message_count:that.message_count}).$el);                         
@@ -389,7 +394,7 @@ define(function (require) {
                         welcome = new model.Welcome();
 
                         welcome.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (model) {
                                 
                                 Useful.correctView(that.body);
@@ -422,7 +427,7 @@ define(function (require) {
                         certification = new model.CertificationCollection();
 
                         certification.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new CertificationList({collection: collection, message_count:that.message_count}).$el);                         
@@ -464,7 +469,7 @@ define(function (require) {
                         moving = new model.MovingCollection();
 
                         moving.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
@@ -507,7 +512,7 @@ define(function (require) {
                         money = new model.MoneyCollection();
 
                         money.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
@@ -550,7 +555,7 @@ define(function (require) {
                         policies = new model.PoliciesCollection();
 
                         policies.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -592,7 +597,7 @@ define(function (require) {
                         newsletter = new model.NewsLetterCollection();
 
                         newsletter.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 
                                 Useful.correctView(that.body);
@@ -638,7 +643,7 @@ define(function (require) {
                     calendar = new model.CalendarCollection();
                     
                     calendar.fetch({
-                        full_url: false,
+                        full_url: true,
                         success: function (collection) {
                             Useful.correctView(that.body);
                             slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
@@ -689,7 +694,7 @@ define(function (require) {
                         facilities = new model.FacilitiesCollection();
 
                         facilities.fetch({
-                            full_url: false,
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
@@ -721,19 +726,19 @@ define(function (require) {
         },
         
         
-        getDayCourse: function (id) {
+        getCourse: function () {
 
-                require(["app/models/daycourse", "app/views/DayCourseList"], function (model, DayCourseList) {
+                require(["app/models/course", "app/views/CourseList"], function (model, CourseList) {
                     
-                    if(typeof(daycourse)==='undefined' || daycourse===null){
+                    if(typeof(courses)==='undefined' || courses===null){
                         Useful.showSpinner();
-                        daycourse = new model.DayCourseCollection();
+                        courses = new model.CourseCollection();
 
-                        daycourse.fetch({
-                            full_url: false,
+                        courses.fetch({
+                            full_url: true,
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new DayCourseList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new CourseList({collection: collection, message_count:that.message_count}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                   
@@ -744,7 +749,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new DayCourseList({collection: daycourse, message_count:that.message_count}).$el);
+                        slider.slidePage(new CourseList({collection: courses, message_count:that.message_count}).$el);
                     }
 
                 });
@@ -754,11 +759,11 @@ define(function (require) {
         },
         
         
-        getDayCourseItem: function (id) {
+        getCourseItem: function (id) {
             
-            require(["app/views/DayCourseItem"], function (DayCourseItem) {
+            require(["app/views/CourseItem"], function (CourseItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new DayCourseItem({model: daycourse.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new CourseItem({model: courses.get(id), message_count:that.message_count}).$el);
                                  
             });
         },
@@ -793,11 +798,14 @@ define(function (require) {
                 
                   if(typeof(deviceModel)==='undefined' || deviceModel===null){
                         Useful.showSpinner();
-                        deviceModel = new model.Device({id:that.device_id});
+                        
                         
                         if(typeof(that.device_id)==='undefined' || that.device_id===null){
                             that.setDeviceDetails();
                         }
+                        
+                        deviceModel = new model.Device({id:that.device_id});
+
 
                         if(typeof(that.device_id)==='undefined' || that.device_id===null || typeof(that.api_key)==='undefined' || that.api_key===null){
                             Useful.hideSpinner();
@@ -805,7 +813,7 @@ define(function (require) {
                             Useful.showAlert('Could not get notification settings, please try again later', 'Problem');
                             window.location.hash = "news";
                         }
-                        else{              
+                        else{   
                             deviceModel.fetch({
                                 api: true,
                                 headers: {device_id:that.device_id,api_key:that.api_key},        
@@ -816,7 +824,7 @@ define(function (require) {
                                                                         }).$el);   
                                     Useful.hideSpinner();
                                 },
-                                error:function(){                   
+                                error:function(model, xhr, options){    
                                     Useful.hideSpinner();
                                     Useful.checkNetwork(slider);                  
                                 }

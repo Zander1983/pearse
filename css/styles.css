@@ -327,3 +327,7 @@ ul#picture-list > li{
     width: 30%;
     text-align: center;
 }
+
+#topbar-title{
+    text-transform:capitalize;
+}

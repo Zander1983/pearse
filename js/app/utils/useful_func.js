@@ -123,11 +123,10 @@ define(function (require) {
     UsefulFuncs.hideSpinner = function(body){
             
             try {
-                console.log('trying to hide spinner ');
-              spinnerplugin.hide();
+                spinnerplugin.hide();
             } 
             catch(e) {
-                console.log('error caught');
+
             } 
             finally {
 
