@@ -5,8 +5,6 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/Map.html'),
-        side_nav            = require('text!tpl/SideNav.html'),
-        side_template       = _.template(side_nav),
         template = _.template(tpl),
         that;
         
@@ -56,7 +54,7 @@ define(function (require) {
 
         render: function () {
     
-            this.$el.html(template({side_nav:side_template({message_count:this.options.message_count})}));
+            this.$el.html(template());
 
             this.initMap();      
            

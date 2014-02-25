@@ -26,7 +26,6 @@ define(function (require) {
 
         doBinds: function(){
    
-            var start = +new Date();  
 
                   this.options.body.find("div#side-nav-cont a").click( function() {
                       //console.log('in side nav click');
@@ -41,10 +40,7 @@ define(function (require) {
 
                    });
 
-            var end =  +new Date();  // log end timestamp
-            var diff = end - start;
-            console.log('diff for going through each li is ');
-            console.log(diff);
+           
     
         },
       

@@ -1,11 +1,12 @@
 define(function (require) {
 
     "use strict";
+    
 
     return function PageSlider(container) {
 
         var currentPage,
-            stateHistory = [], div;
+            stateHistory = [];
 
         this.back = function () {
             location.hash = stateHistory[stateHistory.length - 2];
@@ -19,9 +20,7 @@ define(function (require) {
         
             state = this.cleanState(state);    
         
-            var previous = stateHistory[stateHistory.length-1];
-    
-            this.prepareTitleMenu(state, previous);
+            this.prepareTitleMenu(state);
            
         
             if (l === 0) {
@@ -56,37 +55,23 @@ define(function (require) {
                 return state;
         };
         
-        this.prepareTitleMenu = function(state, previous){
-                
-                if(state==="undefined"){
+        this.prepareTitleMenu = function(state){
+
+                if(state==="undefined" || state===""){
                     var title = 'News';                   
                 }
                 else{
                     var title = state.charAt(0).toUpperCase() + state.slice(1);                  
                 }
 
-                $('.topcoat-navigation-bar__title').html(title);
-                
-                var start = +new Date();   
-                
-                $('#'+previous).removeClass( 'side-nav-active' );
-                $('#'+state).addClass( 'side-nav-active' );
-                
-                var end =  +new Date();  // log end timestamp
-                var diff = end - start;
-                console.log('diff for using id is ');
-                console.log(diff);
-     
-                
-                //unclick revious, click state
-            
+                $('#topbar-title').html(title);
+        
         };
 
         // Use this function directly if you want to control the sliding direction outside PageSlider
         this.slidePageFrom = function (page, from) {
-
-   
-            $('.main-content').append(page);
+            
+            $('#main-content').append(page);
 
             if (!currentPage || !from) {
                 page.attr("class", "page page-center");

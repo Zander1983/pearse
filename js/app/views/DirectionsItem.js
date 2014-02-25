@@ -6,8 +6,6 @@ define(function (require) {
         Backbone            = require('backbone'),
         UsefulFuncs         = require('app/utils/useful_func'),
         tpl                 = require('text!tpl/DirectionsItem.html'),
-        side_nav                = require('text!tpl/SideNav.html'),
-        side_template = _.template(side_nav),
         template = _.template(tpl);
 
     return Backbone.View.extend({
@@ -42,7 +40,7 @@ define(function (require) {
         },
 
         render: function () {
-            this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), model:this.model.attributes}));
+            this.$el.html(template({model:this.model.attributes}));
             return this;
         },
         

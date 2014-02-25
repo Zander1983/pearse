@@ -88,7 +88,7 @@ li.side-nav-active a{
     color:#fff;
 }
 
-body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
+body.left-nav .topcoat-navigation-bar, body.left-nav #main-content {
     left:250px;
 }
 
@@ -171,7 +171,7 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
 
 
 
-.main-content {
+#main-content {
   /* overflow:scroll;
     -webkit-overflow-scrolling: touch;*/
     overflow-x:hidden;
@@ -198,7 +198,7 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
     .slide-menu-button {
         display:none;
     }
-    .main-content {
+    #main-content {
         left:250px;
         right:0;
         width:auto;

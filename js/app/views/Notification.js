@@ -6,8 +6,6 @@ define(function (require) {
         Backbone            = require('backbone'),
         Useful      = require('app/utils/useful_func'),
         tpl                 = require('text!tpl/Notification.html'),
-        side_nav            = require('text!tpl/SideNav.html'),
-        side_template = _.template(side_nav),
         template            = _.template(tpl),
         that;
 
@@ -25,8 +23,7 @@ define(function (require) {
 
         render: function (options) {
          
-            this.$el.html(template({side_nav:side_template({message_count:this.options.message_count}), 
-                                    notification:this.model.get('notification')
+            this.$el.html(template({notification:this.model.get('notification')
                                     }));
             return this;
         },

@@ -21,6 +21,7 @@ define(function (require) {
         video,
         articles,
         deviceModel,
+        certification,
         that;
 
     return Backbone.Router.extend({
@@ -145,21 +146,18 @@ define(function (require) {
 
         getNews: function (id) {
                 
-                console.log('in getNews');
-                
                 require(["app/models/news", "app/views/NewsList"], function (model, NewsList) {
 
                     if(typeof(news)==='undefined' || news===null){
-                        
+   
                         Useful.showSpinner();
                         
                         news = new model.NewsCollection();
 
-                        console.log('before fetch');
                         news.fetch({
                             full_url: false,
                             success: function (collection) {
-                                console.log('in success');
+   
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
                                     slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -207,6 +205,8 @@ define(function (require) {
 
                     if(typeof(support)==='undefined' || support===null){
                         
+                        Useful.showSpinner();
+                        
                         support = new model.SupportCollection();
 
                         support.fetch({
@@ -214,7 +214,13 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error: function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);        
+                
                             }
                         });
                     }
@@ -245,6 +251,8 @@ define(function (require) {
 
                     if(typeof(directions)==='undefined' || directions===null){
                         
+                        Useful.showSpinner();
+                        
                         directions = new model.DirectionsCollection();
 
                         directions.fetch({
@@ -252,7 +260,13 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
                             }
                         });
                     }
@@ -291,6 +305,12 @@ define(function (require) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
                                 Useful.hideSpinner();
+                            },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
                             }
                         });
                     }
@@ -320,7 +340,7 @@ define(function (require) {
                 require(["app/models/video", "app/views/VideoList"], function (model, VideoList) {
 
                     if(typeof(video)==='undefined' || video===null){
-                        
+                        Useful.showSpinner();
                         video = new model.VideoCollection();
 
                         video.fetch({
@@ -328,7 +348,13 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new VideoList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
                             }
                         });
                     }
@@ -370,10 +396,12 @@ define(function (require) {
                                 slider.slidePage(new Welcome({model: model, message_count:that.message_count}).$el);                         
                                 Useful.hideSpinner();
                             },
-                            error:   function(model, xhr, options){
-                               console.log('Error on fetch')
-                               console.log(xhr.responseText);
-                            },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
+                            }
                         });
                     }
                     else{
@@ -390,7 +418,7 @@ define(function (require) {
                 require(["app/models/certification", "app/views/CertificationList"], function (model, CertificationList) {
 
                     if(typeof(certification)==='undefined' || certification===null){
-                        
+                        Useful.showSpinner();
                         certification = new model.CertificationCollection();
 
                         certification.fetch({
@@ -398,7 +426,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new CertificationList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                       
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                       
                             }
                         });
                     }
@@ -428,7 +460,7 @@ define(function (require) {
                 require(["app/models/moving", "app/views/MovingList"], function (model, MovingList) {
 
                     if(typeof(moving)==='undefined' || moving===null){
-                        
+                        Useful.showSpinner();
                         moving = new model.MovingCollection();
 
                         moving.fetch({
@@ -436,11 +468,15 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                       
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                       
                             }
-                        });
-                    }
-                    else{
+                    });
+                }
+                else{
                         Useful.correctView(that.body);
                         slider.slidePage(new MovingList({collection: moving, message_count:that.message_count}).$el);
                     }
@@ -467,7 +503,7 @@ define(function (require) {
                 require(["app/models/money", "app/views/MoneyList"], function (model, MoneyList) {
 
                     if(typeof(money)==='undefined' || money===null){
-                        
+                        Useful.showSpinner();
                         money = new model.MoneyCollection();
 
                         money.fetch({
@@ -475,7 +511,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                       
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                       
                             }
                         });
                     }
@@ -506,7 +546,7 @@ define(function (require) {
                 require(["app/models/policies", "app/views/PoliciesList"], function (model, PoliciesList) {
 
                     if(typeof(policies)==='undefined' || policies===null){
-                        
+                        Useful.showSpinner();
                         policies = new model.PoliciesCollection();
 
                         policies.fetch({
@@ -514,7 +554,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                       
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                       
                             }
                         });
                     }
@@ -544,7 +588,7 @@ define(function (require) {
                 require(["app/models/newsletter", "app/views/NewsLetterList"], function (model, NewsLetterList) {
 
                     if(typeof(newsletter)==='undefined' || newsletter===null){
-                        
+                        Useful.showSpinner();
                         newsletter = new model.NewsLetterCollection();
 
                         newsletter.fetch({
@@ -553,7 +597,13 @@ define(function (require) {
                                 
                                 Useful.correctView(that.body);
                                 slider.slidePage(new NewsLetterList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
                             }
                         });
                     }
@@ -593,7 +643,13 @@ define(function (require) {
                             Useful.correctView(that.body);
                             slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
                             Useful.hideSpinner();
-                        }
+                        },
+                            error:function(){
+                        
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        
+                            }
                     });
                 }
                 else{
@@ -629,6 +685,7 @@ define(function (require) {
                 require(["app/models/facilities", "app/views/FacilitiesList"], function (model, FacilitiesList) {
 
                     if(typeof(facilities)==='undefined' || facilities===null){
+                        Useful.showSpinner();
                         facilities = new model.FacilitiesCollection();
 
                         facilities.fetch({
@@ -636,7 +693,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                   
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                  
                             }
                         });
                     }
@@ -665,7 +726,7 @@ define(function (require) {
                 require(["app/models/daycourse", "app/views/DayCourseList"], function (model, DayCourseList) {
                     
                     if(typeof(daycourse)==='undefined' || daycourse===null){
-                        
+                        Useful.showSpinner();
                         daycourse = new model.DayCourseCollection();
 
                         daycourse.fetch({
@@ -673,7 +734,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new DayCourseList({collection: collection, message_count:that.message_count}).$el);                         
-                                
+                                Useful.hideSpinner();
+                            },
+                            error:function(){                   
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                  
                             }
                         });
                     }
@@ -727,7 +792,7 @@ define(function (require) {
             require(["app/models/device", "app/views/Notification"], function (model, Notification) {
                 
                   if(typeof(deviceModel)==='undefined' || deviceModel===null){
-
+                        Useful.showSpinner();
                         deviceModel = new model.Device({id:that.device_id});
                         
                         if(typeof(that.device_id)==='undefined' || that.device_id===null){
@@ -735,6 +800,7 @@ define(function (require) {
                         }
 
                         if(typeof(that.device_id)==='undefined' || that.device_id===null || typeof(that.api_key)==='undefined' || that.api_key===null){
+                            Useful.hideSpinner();
                             Useful.correctView(that.body);
                             Useful.showAlert('Could not get notification settings, please try again later', 'Problem');
                             window.location.hash = "news";
@@ -747,7 +813,12 @@ define(function (require) {
                                     Useful.correctView(that.body);
                                     slider.slidePage(new Notification({model: data, 
                                                                         message_count:that.message_count
-                                                                        }).$el);                          
+                                                                        }).$el);   
+                                    Useful.hideSpinner();
+                                },
+                                error:function(){                   
+                                    Useful.hideSpinner();
+                                    Useful.checkNetwork(slider);                  
                                 }
                             });
                         }
@@ -770,7 +841,7 @@ define(function (require) {
             require(["app/models/article", "app/views/Article"], function (models, Article) {
                                
                 if(typeof(articles)==='undefined' || articles===null){
-                    
+                    Useful.showSpinner();
                     
                     if(typeof(that.device_id)==='undefined' || that.device_id===null){
                         that.setDeviceDetails();
@@ -787,6 +858,8 @@ define(function (require) {
 
                             Useful.correctView(that.body);
                             slider.slidePage(articleView.$el);
+                            
+                            Useful.hideSpinner();
 
                             $.when(articleView.saveView()).done(function(data){
                                 that.message_count = data.count;
@@ -795,8 +868,9 @@ define(function (require) {
                             data.set('seen', '1');
 
                         },
-                        error: function(){
-                            console.log('failed to fecth artcie'); 
+                        error:function(){                   
+                            Useful.hideSpinner();
+                            Useful.checkNetwork(slider);                  
                         }
                     });
                     
@@ -830,8 +904,7 @@ define(function (require) {
             require(["app/models/article", "app/views/ArticleList"], function (models, ArticleList) {
              
                 if(typeof(articles)==='undefined' || articles===null){
-                    
-
+                    Useful.showSpinner();
                     
                     if(typeof(that.device_id)==='undefined' || that.device_id===null){
                         that.setDeviceDetails();
@@ -848,10 +921,11 @@ define(function (require) {
                             success: function (collection) {
                                 Useful.correctView(that.body);
                                 slider.slidePage(new ArticleList({collection: collection,message_count:that.message_count}).$el);
+                                Useful.hideSpinner();
                             }, 
-                            error: function(model, xhr, options){
-                                    console.log('there was an error, response is ');
-                                    console.log(xhr.responseText);
+                            error:function(){                   
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);                  
                             }
                         }); 
                         
