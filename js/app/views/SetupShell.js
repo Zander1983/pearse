@@ -43,7 +43,11 @@ define(function (require) {
                    
                    
             this.options.body.on("click", "#slide-menu-button", function (e) {
-
+                
+                
+                if(window.location.hash==="#map"){
+                    that.options.body.find('#main-content').css('min-height', '1150px'); 
+                }
                 if (that.options.body.hasClass('left-nav')) {
 
                     that.options.body.removeClass('left-nav');
