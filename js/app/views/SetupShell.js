@@ -5,12 +5,13 @@ define(function (require) {
     var _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/SetupShell.html'),
-        template            = _.template(tpl);
+        template            = _.template(tpl),
+        that;
 
     return Backbone.View.extend({
 
         initialize: function (options) {
-
+            that = this;
             this.render();
         },
 
@@ -19,7 +20,7 @@ define(function (require) {
             //this.$el.html(template({side_nav:side_template({message_count:0})}));
             //return this;
 
-            this.options.body.append(template({message_count:0}));
+            this.options.body.append(template());
             
             this.doBinds();
         },
@@ -43,13 +44,13 @@ define(function (require) {
                    
             this.options.body.on("click", "#slide-menu-button", function (e) {
 
-                if (this.options.body.hasClass('left-nav')) {
+                if (that.options.body.hasClass('left-nav')) {
 
-                    this.options.body.removeClass('left-nav');
+                    that.options.body.removeClass('left-nav');
                    // $('.side-nav').hide();
                 } else {
                    // $('.side-nav').show();
-                    this.options.body.addClass('left-nav');           
+                    that.options.body.addClass('left-nav');           
                 }
             });
             
@@ -57,7 +58,7 @@ define(function (require) {
 
             this.options.body.on("click", "#main-content", function (e) {
 
-                this.options.body.removeClass('left-nav');
+                that.options.body.removeClass('left-nav');
                 //$('.side-nav').hide();
 
             });
