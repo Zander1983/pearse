@@ -157,11 +157,9 @@ define(function (require) {
                         
                         news = new model.NewsCollection();
 
-                        console.log('before get news fetch');
                         news.fetch({
                             full_url: true,
                             success: function (collection) {
-                                console.log('success getting news');
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
                                     slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
@@ -169,11 +167,8 @@ define(function (require) {
                                 
                                 Useful.hideSpinner();
 
-                                
                             },
                             error:   function(model, xhr, options){
-                               console.log('fetch error and resonse is ');
-                               console.log(xhr.responseText);
                                Useful.hideSpinner();
                                Useful.checkNetwork(slider);
                                
