@@ -146,8 +146,37 @@ define(function (require) {
             $('html,body').scrollTop(0);
     
         },
-                      
-
+                
+                
+        updateMessageCounter: function(){
+       
+            require(["app/models/article_view"], function (models) {
+           
+                var article_view_count = new models.ArticleViewCount({device_id: that.device_id, 
+                                                                      project_title: project_title
+                                                                        });
+                
+                article_view_count.fetch( 
+                    {
+                    api: true,
+                    headers: {device_id:that.device_id,api_key:that.api_key},
+                    success: function (data) {
+                        that.message_count = data.get('count');
+                        Useful.updateCountEl(that.message_count);
+     
+                    },
+                    error: function(){
+                        console.log('failed updateMessageCounter');
+                    }
+                }); 
+                
+            });
+            
+        },
+          
+        
+        /*******************ROUTES START HERE***************************/
+        
         getNews: function (id) {
                 
                 require(["app/models/news", "app/views/NewsList"], function (model, NewsList) {
@@ -1037,31 +1066,7 @@ define(function (require) {
         },
         
      
-        updateMessageCounter: function(){
-       
-            require(["app/models/article_view"], function (models) {
-           
-                var article_view_count = new models.ArticleViewCount({device_id: that.device_id, 
-                                                                      project_title: project_title
-                                                                        });
-                
-                article_view_count.fetch( 
-                    {
-                    api: true,
-                    headers: {device_id:that.device_id,api_key:that.api_key},
-                    success: function (data) {
-                        that.message_count = data.get('count');
-                        Useful.updateCountEl(that.message_count);
-     
-                    },
-                    error: function(){
-                        console.log('failed updateMessageCounter');
-                    }
-                }); 
-                
-            });
-            
-        }
+
 
     });
 
