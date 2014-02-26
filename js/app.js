@@ -18,7 +18,7 @@ require.config({
     }
 });
 
-require(['backbone', 'app/router', 'app/binds'], function (Backbone, Router, Binds) {
+require(['backbone', 'app/router'], function (Backbone, Router) {
 
     var router = new Router();
     
