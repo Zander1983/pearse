@@ -123,7 +123,9 @@ define(function (require) {
 
             
         },
+          
                 
+         /******************STANDARD HELPER FUNCTIONS*******************/       
         setupShell: function(){
     
             require(["app/views/SetupShell"], function (SetupShell) {
@@ -174,6 +176,7 @@ define(function (require) {
             
         },
           
+        /******************ENDING STANDARD HELPER FUNCTIONS*******************/
         
         /*******************ROUTES START HERE***************************/
         
