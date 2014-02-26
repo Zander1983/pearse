@@ -24,6 +24,8 @@ define(function (require) {
         
         linkClicked: function(e){
     
+            alert('in linkClicked');
+    
             e.preventDefault();
     
             var href = $(e.currentTarget).attr('href');
@@ -34,6 +36,7 @@ define(function (require) {
             
             }
             else{
+                alert('opening inapp browser');
                 window.open(href, '_blank');
             }
             
