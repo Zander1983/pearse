@@ -113,7 +113,7 @@ define(function (require) {
                 else{
                     if(in_browser===true){
                         //this is when testing in a browser
-                        options.url = 'http://localhost/schoolspace/cli/pearse/www/scripts' + options.url   
+                        options.url = 'http://localhost/schoolspace/cli/'+project_title+'/www/scripts' + options.url   
                     }
                 }
    
