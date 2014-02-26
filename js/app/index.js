@@ -33,7 +33,7 @@ var app = {
      */
     registerDeviceWithServer: function(reg_id){
             
-            var url = server_url+"/device_api/device";
+            var url = push_server_url+"/device_api/device";
             //var url = "http://localhost/schoolspace/device_api/device";
            
           
@@ -68,7 +68,7 @@ var app = {
     
     updateRegId: function(device_id, api_key, reg_id){
         
-            var url = server_url+"/device_api/device/"+device_id;
+            var url = push_server_url+"/device_api/device/"+device_id;
    
             $.ajax({
                 url: url,

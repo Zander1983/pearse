@@ -20,7 +20,7 @@ define(function (require) {
         
             url: function(){
                     if(in_browser===false){
-                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw'
+                        return feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw'
                     }
                     else{
                         return "/school-proxy.php?type=directions";

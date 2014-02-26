@@ -6,70 +6,71 @@ $type = $_GET['type'];
 
 file_put_contents('/var/www/my_logs/script.log', 'in script anmd type is '.$type);
 
+$feed_domain = "http://pearse.schoolspace.ie";
     
 if($type=='news'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw');    
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw');    
 
 }
 elseif($type=="shoutout"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=17&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=17&format=raw');
     
 }
 elseif($type=='staff'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw');    
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=5&format=raw');    
 
 }
 elseif($type=='newsletter'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw');    
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=4&format=raw');    
 
 }
 elseif($type=="policies"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=9&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=9&format=raw');
     
 }
 elseif($type=="directions"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=6&format=raw');
     
 }
 elseif($type=="video"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=3&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=3&format=raw');
     
 }
 elseif($type=='welcome'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw');
     
 }
 elseif($type=='certification'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=14&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=14&format=raw');
     
 }
 elseif($type=='money'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=12&format=raw');
     
 }
 elseif($type=="moving"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=13&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=13&format=raw');
     
 }
 elseif($type=="daycourse"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=11&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=11&format=raw');
     
 }
 elseif($type=='support'){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=8&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=8&format=raw');
     
 }
 elseif ($type=='service') { 
@@ -80,7 +81,7 @@ elseif ($type=='service') {
 }
 elseif ($type=='facilities') { 
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw');
 
 
 }
@@ -121,7 +122,7 @@ elseif($type=="event"){
 }
 elseif($type=="calendar"){
     
-    $xml = file_get_contents('http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=18&format=raw');
+    $xml = file_get_contents($feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=18&format=raw');
     
 }
 elseif($type=="albums"){

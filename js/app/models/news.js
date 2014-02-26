@@ -17,14 +17,10 @@ define(function (require) {
         NewsCollection = Backbone.Collection.extend({
 
             model: News,
-            //url: 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw',
-            
-            //This is used so I can test on a browser. On a device, use the direct link
-         
          
             url: function(){
                     if(in_browser===false){
-                        return 'http://pearse.schoolspace.ie/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw'
+                        return feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw'
                     }
                     else{
                         return "/school-proxy.php?type=news";
