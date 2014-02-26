@@ -241,6 +241,9 @@ html, body, #map-container{
     margin-bottom:5px;
 }
 
+#inner-container a{
+    text-decoration: underline;
+}
 
 #one-column-emphasis {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
