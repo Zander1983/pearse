@@ -197,7 +197,7 @@ define(function (require) {
                                 
                                 Useful.correctView(that.body);
                                 if(Backbone.history.fragment==="" || Backbone.history.fragment==="news"){
-                                    slider.slidePage(new NewsList({collection: collection, message_count:that.message_count}).$el);                         
+                                    slider.slidePage(new NewsList({collection: collection}).$el);                         
                                 }
                                 
                                 Useful.hideSpinner();
@@ -217,7 +217,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new NewsList({collection: news, message_count:that.message_count}).$el);
+                        slider.slidePage(new NewsList({collection: news}).$el);
                     }
                     
         
@@ -233,7 +233,7 @@ define(function (require) {
             
             require(["app/views/NewsItem"], function (NewsItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new NewsItem({model: news.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new NewsItem({model: news.get(id)}).$el);
                                  
             });
         },
@@ -252,7 +252,7 @@ define(function (require) {
                         shoutout.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new ShoutOutList({collection: collection, message_count:that.message_count}).$el);                                                       
+                                slider.slidePage(new ShoutOutList({collection: collection}).$el);                                                       
                                 
                                 Useful.hideSpinner();
 
@@ -267,7 +267,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new ShoutOutList({collection: shoutout, message_count:that.message_count}).$el);
+                        slider.slidePage(new ShoutOutList({collection: shoutout}).$el);
                     }
                     
         
@@ -283,7 +283,7 @@ define(function (require) {
             
             require(["app/views/ShoutOutItem"], function (ShoutOutItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new ShoutOutItem({model: shoutout.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new ShoutOutItem({model: shoutout.get(id)}).$el);
                                  
             });
         },
@@ -301,7 +301,7 @@ define(function (require) {
                         support.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new SupportList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new SupportList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error: function(){
@@ -314,7 +314,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new SupportList({collection: support, message_count:that.message_count}).$el);
+                        slider.slidePage(new SupportList({collection: support}).$el);
                     }
 
                 });
@@ -328,7 +328,7 @@ define(function (require) {
             
             require(["app/views/SupportItem"], function (SupportItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new SupportItem({model: support.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new SupportItem({model: support.get(id)}).$el);
                                  
             });
         },
@@ -346,7 +346,7 @@ define(function (require) {
                         directions.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new DirectionsList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new DirectionsList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){
@@ -359,7 +359,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new DirectionsList({collection: directions, message_count:that.message_count}).$el);
+                        slider.slidePage(new DirectionsList({collection: directions}).$el);
                     }
 
                 });
@@ -373,7 +373,7 @@ define(function (require) {
             
             require(["app/views/DirectionsItem"], function (DirectionsItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new DirectionsItem({model: directions.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new DirectionsItem({model: directions.get(id)}).$el);
                                  
             });
         },         
@@ -389,7 +389,7 @@ define(function (require) {
                         staff.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new StaffList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new StaffList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){
@@ -402,7 +402,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new StaffList({collection: staff, message_count:that.message_count}).$el);
+                        slider.slidePage(new StaffList({collection: staff}).$el);
                     }
                     
                 });
@@ -415,7 +415,7 @@ define(function (require) {
             
             require(["app/views/StaffItem"], function (StaffItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new StaffItem({model: staff.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new StaffItem({model: staff.get(id)}).$el);
                                  
             });
         },
@@ -432,7 +432,7 @@ define(function (require) {
                         video.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new VideoList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new VideoList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){
@@ -445,7 +445,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new VideoList({collection: video, message_count:that.message_count}).$el);
+                        slider.slidePage(new VideoList({collection: video}).$el);
                     }
 
                 });
@@ -458,7 +458,7 @@ define(function (require) {
             
             require(["app/views/VideoItem"], function (VideoItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new VideoItem({model: video.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new VideoItem({model: video.get(id)}).$el);
                                  
             });
         },
@@ -477,7 +477,7 @@ define(function (require) {
                             success: function (model) {
                                 
                                 Useful.correctView(that.body);
-                                slider.slidePage(new Welcome({model: model, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new Welcome({model: model}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){
@@ -490,7 +490,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new Welcome({model: welcome, message_count:that.message_count}).$el);
+                        slider.slidePage(new Welcome({model: welcome}).$el);
                     }
 
                 });
@@ -508,7 +508,7 @@ define(function (require) {
                         certification.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new CertificationList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new CertificationList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
@@ -519,7 +519,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new CertificationList({collection: certification, message_count:that.message_count}).$el);
+                        slider.slidePage(new CertificationList({collection: certification}).$el);
                     }
 
                 });
@@ -533,7 +533,7 @@ define(function (require) {
             
             require(["app/views/CertificationItem"], function (CertificationItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new CertificationItem({model: certification.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new CertificationItem({model: certification.get(id)}).$el);
                                  
             });
         },
@@ -549,7 +549,7 @@ define(function (require) {
                         moving.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new MovingList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new MovingList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
@@ -560,7 +560,7 @@ define(function (require) {
                 }
                 else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new MovingList({collection: moving, message_count:that.message_count}).$el);
+                        slider.slidePage(new MovingList({collection: moving}).$el);
                     }
 
                 });
@@ -574,7 +574,7 @@ define(function (require) {
             
             require(["app/views/MovingItem"], function (MovingItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new MovingItem({model: moving.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new MovingItem({model: moving.get(id)}).$el);
                                  
             });
         },
@@ -591,7 +591,7 @@ define(function (require) {
                         money.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new MoneyList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new MoneyList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
@@ -602,7 +602,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new MoneyList({collection: money, message_count:that.message_count}).$el);
+                        slider.slidePage(new MoneyList({collection: money}).$el);
                     }
 
                 });
@@ -616,7 +616,7 @@ define(function (require) {
             
             require(["app/views/MoneyItem"], function (MoneyItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new MoneyItem({model: money.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new MoneyItem({model: money.get(id)}).$el);
                                  
             });
         },
@@ -633,7 +633,7 @@ define(function (require) {
                         policies.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new PoliciesList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new PoliciesList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
@@ -644,7 +644,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new PoliciesList({collection: policies, message_count:that.message_count}).$el);
+                        slider.slidePage(new PoliciesList({collection: policies}).$el);
                     }
 
                 });
@@ -658,7 +658,7 @@ define(function (require) {
             
             require(["app/views/PoliciesItem"], function (PoliciesItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new PoliciesItem({model: policies.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new PoliciesItem({model: policies.get(id)}).$el);
                                  
             });
         },
@@ -675,7 +675,7 @@ define(function (require) {
                             success: function (collection) {
                                 
                                 Useful.correctView(that.body);
-                                slider.slidePage(new NewsLetterList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new NewsLetterList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){
@@ -688,7 +688,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new NewsLetterList({collection: newsletter, message_count:that.message_count}).$el);
+                        slider.slidePage(new NewsLetterList({collection: newsletter}).$el);
                     }
 
                 });
@@ -702,7 +702,7 @@ define(function (require) {
             
             require(["app/views/NewsLetterItem"], function (NewsLetterItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new NewsLetterItem({model: newsletter.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new NewsLetterItem({model: newsletter.get(id)}).$el);
                                  
             });
         },
@@ -719,7 +719,7 @@ define(function (require) {
                     event.fetch({
                         success: function (collection) {
                             Useful.correctView(that.body);
-                            slider.slidePage(new EventList({collection: collection, message_count:that.message_count}).$el);                          
+                            slider.slidePage(new EventList({collection: collection}).$el);                          
                             Useful.hideSpinner();
                         },
                             error:function(){
@@ -732,7 +732,7 @@ define(function (require) {
                 }
                 else{
                     Useful.correctView(that.body);
-                    slider.slidePage(new EventList({collection: event, message_count:that.message_count}).$el);
+                    slider.slidePage(new EventList({collection: event}).$el);
                 }
                 
                 
@@ -744,7 +744,7 @@ define(function (require) {
         getEventItem: function (id) {
             require(["app/views/EventItem"], function (EventItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new EventItem({model: event.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new EventItem({model: event.get(id)}).$el);
                                  
             });
         },   
@@ -762,7 +762,7 @@ define(function (require) {
                     calendar.fetch({
                         success: function (collection) {
                             Useful.correctView(that.body);
-                            slider.slidePage(new CalendarList({collection: collection, message_count:that.message_count}).$el);                          
+                            slider.slidePage(new CalendarList({collection: collection}).$el);                          
                             Useful.hideSpinner();
                         },
                             error:function(){
@@ -775,7 +775,7 @@ define(function (require) {
                 }
                 else{
                     Useful.correctView(that.body);
-                    slider.slidePage(new CalendarList({collection: calendar, message_count:that.message_count}).$el);
+                    slider.slidePage(new CalendarList({collection: calendar}).$el);
                 }
                 
                 
@@ -787,7 +787,7 @@ define(function (require) {
         getCalendarItem: function (id) {
             require(["app/views/CalendarItem"], function (CalendarItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new CalendarItem({model: calendar.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new CalendarItem({model: calendar.get(id)}).$el);
                                  
             });
         },
@@ -797,7 +797,7 @@ define(function (require) {
             
             require(["app/views/Facebook"], function (Facebook) { 
                 Useful.correctView(that.body);
-                slider.slidePage(new Facebook({message_count:that.message_count}).$el);               
+                slider.slidePage(new Facebook().$el);               
              });
         },
                 
@@ -813,7 +813,7 @@ define(function (require) {
                         facilities.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new FacilitiesList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new FacilitiesList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                   
@@ -824,7 +824,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new FacilitiesList({collection: facilities, message_count:that.message_count}).$el);
+                        slider.slidePage(new FacilitiesList({collection: facilities}).$el);
                     }
 
                 });
@@ -836,7 +836,7 @@ define(function (require) {
             
             require(["app/views/FacilitiesItem"], function (FacilitiesItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new FacilitiesItem({model: facilities.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new FacilitiesItem({model: facilities.get(id)}).$el);
                                  
             });
         },
@@ -853,7 +853,7 @@ define(function (require) {
                         courses.fetch({
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new CourseList({collection: collection, message_count:that.message_count}).$el);                         
+                                slider.slidePage(new CourseList({collection: collection}).$el);                         
                                 Useful.hideSpinner();
                             },
                             error:function(){                   
@@ -864,7 +864,7 @@ define(function (require) {
                     }
                     else{
                         Useful.correctView(that.body);
-                        slider.slidePage(new CourseList({collection: courses, message_count:that.message_count}).$el);
+                        slider.slidePage(new CourseList({collection: courses}).$el);
                     }
 
                 });
@@ -878,7 +878,7 @@ define(function (require) {
             
             require(["app/views/CourseItem"], function (CourseItem) {
                 Useful.correctView(that.body);
-                 slider.slidePage(new CourseItem({model: courses.get(id), message_count:that.message_count}).$el);
+                 slider.slidePage(new CourseItem({model: courses.get(id)}).$el);
                                  
             });
         },
@@ -887,7 +887,7 @@ define(function (require) {
         getMap: function () {
             
             require(["app/views/Map"], function (Map) {    
-                var mapView = new Map({body:that.body, message_count:that.message_count});
+                var mapView = new Map({body:that.body});
                 //mapView.delegateEvents();
                 Useful.correctView(that.body);
                 slider.slidePage(mapView.$el);
@@ -902,7 +902,7 @@ define(function (require) {
             
             require(["app/views/Contact"], function (Contact) { 
                 Useful.correctView(that.body);
-                slider.slidePage(new Contact({message_count:that.message_count}).$el);               
+                slider.slidePage(new Contact().$el);               
              });
         },
                 
@@ -933,8 +933,7 @@ define(function (require) {
                                 headers: {device_id:that.device_id,api_key:that.api_key},        
                                 success: function (data) {
                                     Useful.correctView(that.body);
-                                    slider.slidePage(new Notification({model: data, 
-                                                                        message_count:that.message_count
+                                    slider.slidePage(new Notification({model: data
                                                                         }).$el);   
                                     Useful.hideSpinner();
                                 },
@@ -947,8 +946,7 @@ define(function (require) {
                     
                   }else{    
                         Useful.correctView(that.body);
-                        slider.slidePage(new Notification({model: deviceModel, 
-                                                            message_count:that.message_count
+                        slider.slidePage(new Notification({model: deviceModel
                                                             }).$el);    
                   }
 
@@ -976,7 +974,7 @@ define(function (require) {
                         headers: {device_id:that.device_id,api_key:that.api_key},
                         success: function (data) {
                             
-                            var articleView = new Article({model: data, message_count:that.message_count});
+                            var articleView = new Article({model: data});
 
                             Useful.correctView(that.body);
                             slider.slidePage(articleView.$el);
@@ -1001,8 +999,7 @@ define(function (require) {
                     
                     var articleView = new Article({model: articles.get(id), 
                                                    device_id:that.device_id,
-                                                   api_key:that.api_key,
-                                                   message_count:that.message_count
+                                                   api_key:that.api_key
                                                     });
                                                     
                     Useful.correctView(that.body);
@@ -1042,7 +1039,7 @@ define(function (require) {
                             headers: {device_id:that.device_id,api_key:that.api_key},
                             success: function (collection) {
                                 Useful.correctView(that.body);
-                                slider.slidePage(new ArticleList({collection: collection,message_count:that.message_count}).$el);
+                                slider.slidePage(new ArticleList({collection: collection}).$el);
                                 Useful.hideSpinner();
                             }, 
                             error:function(){                   
@@ -1061,7 +1058,7 @@ define(function (require) {
                 else{
 
                     Useful.correctView(that.body);
-                    slider.slidePage(new ArticleList({collection: articles,message_count:that.message_count}).$el);
+                    slider.slidePage(new ArticleList({collection: articles}).$el);
                 }
   
 
