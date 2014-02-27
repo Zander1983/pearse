@@ -68,7 +68,7 @@ define(function (require) {
                     src = $(obj).attr('src');
                     if(src.indexOf('http') === -1){
                         //therefore its a relative path
-                        description = description.replace(src,"http://mallowcollege.ie"+src);                         
+                        description = description.replace(src,feed_domain+src);                         
                     }
             });
             
