@@ -178,6 +178,7 @@ var app = {
 
             case 'message':
          
+                
                 window.location.hash = "article/"+e.payload.article_id;
          
                 break;

@@ -40,7 +40,7 @@ define(function (require) {
             "directions-item/:id": "getDirectionsItem",
             "staff": "getStaff",
             "staff-item/:id": "getStaffItem",
-            "notification": "getNotification",
+            
             "video": "getVideo",
             "video-item/:id": "getVideoItem",
             "welcome": "getWelcome",
@@ -65,6 +65,9 @@ define(function (require) {
             "course-item/:id": "getCourseItem",
             "map": "getMap",
             "contact": "getContact",
+            
+            /*****In Every Project**************/
+            "notification": "getNotification",
             "articles/:project_title": "getArticles",
             "article/:id": "getArticle",
         },
