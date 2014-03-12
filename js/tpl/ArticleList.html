@@ -5,7 +5,7 @@
         <ul class="topcoat-list list" id="article-list">
         <% _.each(article, function(item) { %>
         <li class="topcoat-list__item" data-id="<%= item.id %>">
-                <a href="#article/<%= item.id %>">
+                <a href="#message/<%= item.id %>">
                     <img src="img/crest_40.jpg" />
                     <p><% print(item.title) 
                             if(item.seen!=='1'){
