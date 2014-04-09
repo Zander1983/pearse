@@ -241,12 +241,9 @@ define(function (require) {
 
                             },
                             error:   function(model, xhr, options){
-                                
-                                console.log('in the error and response is ')
-                                console.log(xhr.responseText);
-                            
-                               Useful.hideSpinner();
-                               Useful.checkNetwork(slider);
+                                Useful.correctView(that.body); 
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
                                
                             },
                                     
@@ -295,8 +292,9 @@ define(function (require) {
 
                             },
                             error:   function(model, xhr, options){
-                               Useful.hideSpinner();
-                               Useful.checkNetwork(slider);
+                                    Useful.correctView(that.body); 
+                                    Useful.hideSpinner();
+                                    Useful.checkNetwork(slider);
                                
                             },
                                     
@@ -343,8 +341,9 @@ define(function (require) {
                             },
                             error: function(){
                         
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);        
+                                Useful.checkNetwork(slider); 
                 
                             }
                         });
@@ -387,7 +386,8 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){
-                        
+
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -430,7 +430,7 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){
-                        
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -474,6 +474,7 @@ define(function (require) {
                             },
                             error:function(){
                         
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -518,7 +519,7 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){
-                        
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -549,8 +550,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                       
+                                Useful.checkNetwork(slider);                   
                             }
                         });
                     }
@@ -590,8 +592,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                       
+                                Useful.checkNetwork(slider);                    
                             }
                     });
                 }
@@ -632,8 +635,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                       
+                                Useful.checkNetwork(slider);                  
                             }
                         });
                     }
@@ -674,8 +678,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                       
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                       
+                                Useful.checkNetwork(slider);                  
                             }
                         });
                     }
@@ -716,7 +721,7 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){
-                        
+                                Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -761,6 +766,7 @@ define(function (require) {
                         },
                             error:function(){
 
+                              Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -803,7 +809,7 @@ define(function (require) {
                             Useful.hideSpinner();
                         },
                             error:function(){
-                        
+                              Useful.correctView(that.body); 
                                 Useful.hideSpinner();
                                 Useful.checkNetwork(slider);
                         
@@ -854,8 +860,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                   
+                              Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                  
+                                Useful.checkNetwork(slider);            
                             }
                         });
                     }
@@ -894,8 +901,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             },
                             error:function(){                   
+                              Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                  
+                                Useful.checkNetwork(slider);          
                             }
                         });
                     }
@@ -975,8 +983,9 @@ define(function (require) {
                                     Useful.hideSpinner();
                                 },
                                 error:function(model, xhr, options){    
+                                     Useful.correctView(that.body); 
                                     Useful.hideSpinner();
-                                    Useful.checkNetwork(slider);                  
+                                    Useful.checkNetwork(slider);             
                                 }
                             });
                         }
@@ -1026,8 +1035,9 @@ define(function (require) {
 
                         },
                         error:function(){                   
-                            Useful.hideSpinner();
-                            Useful.checkNetwork(slider);                  
+                                Useful.correctView(that.body); 
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);              
                         }
                     });
                     
@@ -1080,8 +1090,9 @@ define(function (require) {
                                 Useful.hideSpinner();
                             }, 
                             error:function(){                   
+                                  Useful.correctView(that.body); 
                                 Useful.hideSpinner();
-                                Useful.checkNetwork(slider);                  
+                                Useful.checkNetwork(slider);            
                             }
                         }); 
                         
