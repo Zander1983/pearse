@@ -20,13 +20,17 @@ define(function (require) {
                          
             url: function(){
                     if(in_browser===false){
-                        return feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw'
+                        return this.feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=7&format=raw'
                     }
                     else{
-                        return "/school-proxy.php?type=facilities";
+                        return "/school-proxy.php?type=facilities&feed_domain="+this.feed_domain;
                     }
             },
             
+            initialize: function(options){
+                this.feed_domain = options.feed_domain;
+        
+            },
         
             parse: function (data) {
 

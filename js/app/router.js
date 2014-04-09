@@ -6,11 +6,14 @@ define(function (require) {
         PageSlider  = require('app/utils/pageslider'),
         Useful      = require('app/utils/useful_func'),
         slider      = new PageSlider($('body')),
+        projectModel = require("app/models/project"),
         news,
         event,
         newsletter,
         staff,
         policies,
+        photos,
+        albums,
         directions,
         facilities,
         support,
@@ -24,12 +27,17 @@ define(function (require) {
         certification,
         calendar,
         shoutout,
+        flickr_api_key,
+        flickr_user_id,
+        feed_domain,
+        project,
+        tweets,
         that;
 
     return Backbone.Router.extend({
 
         routes: {
-            "": "getNews",
+            "": "getHome",
             "news": "getNews",
             "news-item/:id": "getNewsItem",
             "shout-out": "getShoutOut",
@@ -65,11 +73,16 @@ define(function (require) {
             "course-item/:id": "getCourseItem",
             "map": "getMap",
             "contact": "getContact",
+            "albums": "getAlbums",
+            "photos/:id": "getPhotos",
+            "photo-item/:id": "getPhotoItem",
             
             /*****In Every Project**************/
             "notification": "getNotification",
             "messages/:project_title": "getArticles",
             "message/:id": "getArticle",
+            "tweets": "getTweets",
+            "tweets-item/:id": "getTweetsItem",
         },
         
         initialize: function() {   
@@ -81,6 +94,8 @@ define(function (require) {
             //this.bind( "route", this.routeChange);
             
             this.storage = window.localStorage;
+            
+            this.setProjectDetails();
 
             this.setDeviceDetails();
  
@@ -102,16 +117,20 @@ define(function (require) {
                     //172.16.22.68
                     //options.url = "http://localhost/schoolspace/device_api" + options.url;
                     
-                    if(options.update_notification==true){
-                       //options.url = "http://localhost/schoolspace/device_api/update_notification" + options.url+"";   
-                       options.url = push_server_url+"/device_api/update_notification" + options.url+"";   
+                    if(in_browser===true){
+                        options.url = "http://localhost/schoolspace.me/device_api" + options.url;    
                     }
                     else{
-                        //options.url = "http://localhost/schoolspace/device_api" + options.url;   
-                        options.url = push_server_url+"/device_api" + options.url;          
+                        if(options.update_notification==true){
+                           //options.url = "http://localhost/schoolspace/device_api/update_notification" + options.url+"";   
+                           options.url = push_server_url+"/device_api/update_notification" + options.url+"";   
+                        }
+                        else{
+                            //options.url = "http://localhost/schoolspace/device_api" + options.url;   
+                            options.url = push_server_url+"/device_api" + options.url;          
 
+                        }
                     }
-                    
                 }
                 else{
                     if(in_browser===true){
@@ -129,6 +148,21 @@ define(function (require) {
           
                 
          /******************STANDARD HELPER FUNCTIONS*******************/       
+         getHome: function(){
+    
+            require(["app/views/Home"], function (Home) {
+
+                if(is_push===false){
+                    slider.slidePage(new Home().$el);                       
+                }
+                is_push = false;
+
+            });
+            
+    
+        },
+
+ 
         setupShell: function(){
     
             require(["app/views/SetupShell"], function (SetupShell) {
@@ -191,7 +225,7 @@ define(function (require) {
 
                         Useful.showSpinner();
                         
-                        news = new model.NewsCollection();
+                        news = new model.NewsCollection({feed_domain:feed_domain});
 
                         news.fetch({
                             success: function (collection) {
@@ -250,7 +284,7 @@ define(function (require) {
    
                         Useful.showSpinner();
                         
-                        shoutout = new model.ShoutOutCollection();
+                        shoutout = new model.ShoutOutCollection({feed_domain:feed_domain});
 
                         shoutout.fetch({
                             success: function (collection) {
@@ -299,7 +333,7 @@ define(function (require) {
                         
                         Useful.showSpinner();
                         
-                        support = new model.SupportCollection();
+                        support = new model.SupportCollection({feed_domain:feed_domain});
 
                         support.fetch({
                             success: function (collection) {
@@ -344,7 +378,7 @@ define(function (require) {
                         
                         Useful.showSpinner();
                         
-                        directions = new model.DirectionsCollection();
+                        directions = new model.DirectionsCollection({feed_domain:feed_domain});
 
                         directions.fetch({
                             success: function (collection) {
@@ -387,7 +421,7 @@ define(function (require) {
 
                     if(typeof(staff)==='undefined' || staff===null){
                         Useful.showSpinner();
-                        staff = new model.StaffCollection();
+                        staff = new model.StaffCollection({feed_domain:feed_domain});
 
                         staff.fetch({
                             success: function (collection) {
@@ -430,7 +464,7 @@ define(function (require) {
 
                     if(typeof(video)==='undefined' || video===null){
                         Useful.showSpinner();
-                        video = new model.VideoCollection();
+                        video = new model.VideoCollection({feed_domain:feed_domain});
 
                         video.fetch({
                             success: function (collection) {
@@ -474,7 +508,7 @@ define(function (require) {
                     if(typeof(welcome)==='undefined' || welcome===null){
                         Useful.showSpinner();
                         
-                        welcome = new model.Welcome();
+                        welcome = new model.Welcome({feed_domain:feed_domain});
 
                         welcome.fetch({
                             success: function (model) {
@@ -506,7 +540,7 @@ define(function (require) {
 
                     if(typeof(certification)==='undefined' || certification===null){
                         Useful.showSpinner();
-                        certification = new model.CertificationCollection();
+                        certification = new model.CertificationCollection({feed_domain:feed_domain});
 
                         certification.fetch({
                             success: function (collection) {
@@ -547,7 +581,7 @@ define(function (require) {
 
                     if(typeof(moving)==='undefined' || moving===null){
                         Useful.showSpinner();
-                        moving = new model.MovingCollection();
+                        moving = new model.MovingCollection({feed_domain:feed_domain});
 
                         moving.fetch({
                             success: function (collection) {
@@ -589,7 +623,7 @@ define(function (require) {
 
                     if(typeof(money)==='undefined' || money===null){
                         Useful.showSpinner();
-                        money = new model.MoneyCollection();
+                        money = new model.MoneyCollection({feed_domain:feed_domain});
 
                         money.fetch({
                             success: function (collection) {
@@ -631,7 +665,7 @@ define(function (require) {
 
                     if(typeof(policies)==='undefined' || policies===null){
                         Useful.showSpinner();
-                        policies = new model.PoliciesCollection();
+                        policies = new model.PoliciesCollection({feed_domain:feed_domain});
 
                         policies.fetch({
                             success: function (collection) {
@@ -672,7 +706,7 @@ define(function (require) {
 
                     if(typeof(newsletter)==='undefined' || newsletter===null){
                         Useful.showSpinner();
-                        newsletter = new model.NewsLetterCollection();
+                        newsletter = new model.NewsLetterCollection({feed_domain:feed_domain});
 
                         newsletter.fetch({
                             success: function (collection) {
@@ -760,7 +794,7 @@ define(function (require) {
                 if(typeof(calendar)==='undefined' || calendar===null){
                     Useful.showSpinner();
                     
-                    calendar = new model.CalendarCollection();
+                    calendar = new model.CalendarCollection({feed_domain:feed_domain});
                     
                     calendar.fetch({
                         success: function (collection) {
@@ -811,7 +845,7 @@ define(function (require) {
 
                     if(typeof(facilities)==='undefined' || facilities===null){
                         Useful.showSpinner();
-                        facilities = new model.FacilitiesCollection();
+                        facilities = new model.FacilitiesCollection({feed_domain:feed_domain});
 
                         facilities.fetch({
                             success: function (collection) {
@@ -851,7 +885,7 @@ define(function (require) {
                     
                     if(typeof(courses)==='undefined' || courses===null){
                         Useful.showSpinner();
-                        courses = new model.CourseCollection();
+                        courses = new model.CourseCollection({feed_domain:feed_domain});
 
                         courses.fetch({
                             success: function (collection) {
@@ -1068,7 +1102,212 @@ define(function (require) {
             });
         },
         
+        
+    getAlbums: function (id) {
+            //body.removeClass('left-nav');
+            require(["app/models/album", "app/models/project", "app/views/AlbumList"], function (model, projectModel, AlbumList) {
+       
+                if(typeof(albums)==='undefined' || albums===null){
+                    
+                    Useful.showSpinner();
+                    
+                    /*
+                     * FOR BROWSER TESTING
+                     */
+                    /*
+                    if(in_browser===true){
+                        that.device_id = test_device_id;
+                        that.api_key = test_api_key;
+                    }
+                    
+                    if(is_emulator===true){
+                        that.device_id = test_device_id;
+                        that.api_key = test_api_key;
+                    }*/
+                    
+                    if(typeof(that.device_id)==='undefined' || that.device_id===null){
+                        that.setDeviceDetails();
+                    }
+                    
+                    
+                    if(typeof(flickr_api_key)==='undefined' || flickr_api_key===null){
+
+                        console.log('before the when');
+                        $.when(that.setProjectDetailsWait()).done(function(data){
+
+                        });
+                        console.log('after the when');
+                    }
+
+                    albums = new model.AlbumCollection({flickr_api_key:flickr_api_key, flickr_user_id:flickr_user_id});
+
+                    albums.fetch({
+                        full_url: false,
+                        success: function (collection) {
+                            Useful.correctView(that.body);
+                            slider.slidePage(new AlbumList({collection: collection}).$el);
+                            Useful.hideSpinner();
+                        },
+                        error: function(){
+                                Useful.correctView(that.body);
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        }
+                    });
+         
+
+
+                }
+                else{ 
+                    Useful.correctView(that.body);
+                    slider.slidePage(new AlbumList({collection: albums}).$el);
+                }
+                            
+            });
+        },
+        
+        
+        
+         getPhotos: function (id) {
+            //body.removeClass('left-nav');
+            require(["app/models/photo", "app/views/PhotoList"], function (model, PhotoList) {
+                
+                    Useful.showSpinner();
+                    photos = new model.PhotoCollection([], {flickr_api_key:flickr_api_key,
+                                                            flickr_user_id:flickr_user_id,
+                                                            photoset_id:id});
+                    
+                    photos.fetch({
+                        full_url: true,
+                        success: function (collection) {
+                            Useful.correctView(that.body);
+                            slider.slidePage(new PhotoList({collection: collection}).$el);
+                            Useful.hideSpinner();
+                            
+                            $('img.lazy').lazyload();                            
+                            setTimeout(function(){
+                                $(window).trigger('scroll');
+                            },1000);
+                        
+                        },
+                        error: function(){
+                                Useful.correctView(that.body);
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        }
+                    });
+                            
+            });
+        },
+        
+        getPhotoItem: function (id) {
+            //body.removeClass('left-nav');
+            require(["app/views/PhotoItem"], function (PhotoItem) {
+                 Useful.correctView(that.body);
+                 slider.slidePage(new PhotoItem({model: photos.get(id)}).$el);
+                           
+            });
+        },
+                
+        
+        getTweets: function () {
+
+            require(["app/models/tweet", "app/views/TweetList"], function (models, TweetList) {
      
+                if(typeof(tweets)==='undefined' || tweets===null){
+                    
+                    Useful.showSpinner();
+                    
+                    tweets = new models.TweetCollection(); 
+          
+                    tweets.fetch({
+                        api: true,
+                        headers: {device_id:that.device_id,api_key:that.api_key},
+                        success: function (collection) {
+                            Useful.correctView(that.body);
+                            slider.slidePage(new TweetList({collection: collection}).$el);                      
+                            Useful.hideSpinner();
+                        }, 
+                        error: function(){
+                                Useful.correctView(that.body);
+                                Useful.hideSpinner();
+                                Useful.checkNetwork(slider);
+                        }
+                    }); 
+                    
+                    
+                }
+                else{
+                    Useful.correctView(that.body);
+                    slider.slidePage(new TweetList({collection: tweets}).$el);
+                }
+                                 
+            });
+           
+        },
+        
+        getTweetsItem: function (id) {
+            
+            require(["app/views/TweetItem"], function (TweetItem) {
+
+                Useful.correctView(that.body);
+                 slider.slidePage(new TweetItem({model: tweets.get(id)}).$el);
+                                 
+            });
+        },
+        
+                
+        setProjectDetails: function(){
+    
+            require(["app/models/project"], function (projectModel) {
+              
+                
+                    project = new projectModel.Project({id:project_title});
+                    //get flicker details
+
+                    project.fetch({
+                        api: true,
+                        headers: {device_id:standard_device_id,api_key:standard_api_key},        
+                        success: function (data) {
+
+                            console.log('');
+
+                            flickr_user_id = data.get('flickr_user_id');
+                            flickr_api_key = data.get('flickr_api_key');
+                            feed_domain = data.get('feed_domain');
+         
+                        },
+                        error:   function(model, xhr, options){
+                           console.log('in setProjectDetails error');
+                        },
+                    });     
+            });    
+        },
+        
+        
+        setProjectDetailsWait: function(){
+     
+                    project = new projectModel.Project({id:project_title});
+
+                    return project.fetch({
+                        api: true,
+                        async:false,
+                        headers: {device_id:standard_device_id,api_key:standard_api_key},        
+                        success: function (data) {
+                            
+                            console.log('after the success');
+
+                            flickr_user_id = data.get('flickr_user_id');
+                            flickr_api_key = data.get('flickr_api_key');
+                            feed_domain = data.get('feed_domain');
+         
+                        },
+                        error:   function(model, xhr, options){
+                           console.log('in setProjectDetails error');
+                        },
+                    });     
+  
+        },
 
 
     });

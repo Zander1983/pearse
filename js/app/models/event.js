@@ -30,7 +30,7 @@ define(function (require) {
 
             url: function(){
                     if(in_browser===false){
-                        return 'https://www.google.com/calendar/feeds/pearse.college12@gmail.com/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true'
+                        return 'https://www.google.com/calendar/feeds/'+gmail+'/public/full?orderby=starttime&sortorder=ascending&max-results=10&futureevents=true'
                     }
                     else{
                         return "/school-proxy.php?type=event";

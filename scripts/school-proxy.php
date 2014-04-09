@@ -4,9 +4,11 @@
     
 $type = $_GET['type'];
 
+file_put_contents('/var/www/my_logs/type.log', $type, FILE_APPEND);
 
-
-$feed_domain = "http://pearse.schoolspace.ie";
+$feed_domain = $_GET['feed_domain'];
+$flickr_api_key = $_GET['flickr_api_key'];
+$flickr_user_id = $_GET['flickr_user_id'];
     
 if($type=='news'){
     
@@ -132,10 +134,10 @@ elseif($type=="albums"){
     
     $link = "http://api.flickr.com/services/rest/?";
     $link .= "&method=flickr.photosets.getList";
-    $link .= "&api_key=0ca57413706b5500f54f134b27f0c5c9";
-    $link .= "&user_id=95277676@N06";
+    $link .= "&api_key=".$flickr_api_key;
+    $link .= "&user_id=".$flickr_user_id;
     
-     file_put_contents('/var/www/my_logs/link.log', 'link is '.$link);
+    file_put_contents('/var/www/my_logs/link.log', $link);
     
     $xml = file_get_contents($link);
     
@@ -146,7 +148,7 @@ elseif($type=="photos"){
     
     $link = 'http://api.flickr.com/services/rest/?';
     $link .= '&method=flickr.photosets.getPhotos';
-    $link .= '&api_key=0ca57413706b5500f54f134b27f0c5c9&user_id=95277676@N06';
+    $link .= '&api_key='.$flickr_api_key.'&user_id='.$flickr_user_id;
     $link .= "&extras=url_sq,url_t,url_s,url_m,url_o";
     $link .= "&photoset_id=".$photoset_id;
     

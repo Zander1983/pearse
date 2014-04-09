@@ -19,10 +19,14 @@ define(function (require) {
                         return feed_domain+'/index.php?option=com_ninjarsssyndicator&feed_id=16&format=raw'
                     }
                     else{
-                        return "/school-proxy.php?type=welcome";
+                        return "/school-proxy.php?type=welcome&feed_domain="+this.feed_domain;
                     }
             },
             
+            initialize: function(options){
+                this.feed_domain = options.feed_domain;
+        
+            },
         
             parse: function (xml) {
 
